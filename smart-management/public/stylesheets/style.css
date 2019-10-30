@@ -7038,8 +7038,7 @@ a {
   width: 32%;
   color: black;
   background-color: yellow;
-  font: 20px "Times New Roman";
-  xs: 100%; }
+  font: 20px "Times New Roman"; }
 
 .Botao_gif:hover {
   color: transparent;
@@ -7053,5 +7052,16 @@ a {
   width: 300px;
   color: black;
   background-color: blue; }
+
+input.icon {
+  padding-left: 34px; }
+
+span.icon {
+  position: absolute;
+  margin-left: 7px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 10; }
 
 /*# sourceMappingURL=style.css.map */
