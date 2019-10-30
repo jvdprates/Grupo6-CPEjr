@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Página Inicial' });
+  res.render('index', { title: 'Stocks' });
 });
 
 router.get('/1aba', function(req, res, next) {
