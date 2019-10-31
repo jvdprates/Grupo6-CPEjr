@@ -4,7 +4,7 @@ const firebase = require('firebase');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Stocks' });
+  res.render('index', { title: 'Stocks', layout: 'layout2' });
 });
 
 router.post('/index', function(req, res, next) {
@@ -30,20 +30,20 @@ router.post('/index', function(req, res, next) {
 
 
 router.get('/1aba', function(req, res, next) {
-  res.render('1aba', { title: 'Stocks - Minha Carteira' });
+  res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout'});
 });
 
 
 router.get('/2aba', function(req, res, next) {
-  res.render('2aba', { title: 'Stocks - Minha Rentabilidade' });
+  res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout' });
 });
 
 router.get('/3aba', function(req, res, next) {
-  res.render('3aba', { title: 'Stocks - Pesquisa de papéis' });
+  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout' });
 });
 
 router.get('/esqueci-minha-senha', function(req, res, next) {
-  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha' });
+  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout2' });
 });
 
 
