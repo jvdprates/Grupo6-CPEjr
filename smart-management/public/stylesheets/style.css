@@ -7052,6 +7052,16 @@ a {
   width: 300px;
   color: black;
   background-color: blue; }
+  .Botao_gif .verde {
+    background-color: #7abd6a;
+    color: #7abd6a; }
+
+.enter {
+  margin-top: 50px; }
+
+.corpo {
+  background-color: black;
+  color: white; }
 
 input.icon {
   padding-left: 34px; }
