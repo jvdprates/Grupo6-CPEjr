@@ -46,7 +46,9 @@ router.get('/esqueci-minha-senha', function(req, res, next) {
   res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha' });
 });
 
-
+router.get('/redefinir-senha', function(req, res, next) {
+  res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });
+});
 
 
 module.exports = router;
