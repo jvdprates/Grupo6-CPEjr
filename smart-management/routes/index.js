@@ -42,6 +42,9 @@ router.get('/3aba', function(req, res, next) {
   res.render('3aba', { title: 'Stocks - Pesquisa de papéis' });
 });
 
+router.get('/esqueci-minha-senha', function(req, res, next) {
+  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha' });
+});
 
 
 
