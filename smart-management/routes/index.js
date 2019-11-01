@@ -21,7 +21,7 @@ router.post('/index', function(req, res, next) {
   // console.log("_________________________________________________________________________________________________");
   // console.log(fIREBASE.user.uid);
   // console.log("_________________________________________________________________________________________________");
-  res.redirect('/');
+  res.redirect('/1aba');
   // }).catch((error) => {
   // console.log(error);
   // res.redirect('/error');
@@ -44,6 +44,10 @@ router.get('/3aba', function(req, res, next) {
 
 router.get('/esqueci-minha-senha', function(req, res, next) {
   res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout2' });
+});
+
+router.get('/registrar', function(req, res, next) {
+  res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout2' });
 });
 
 
