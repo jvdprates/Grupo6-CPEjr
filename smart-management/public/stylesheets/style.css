@@ -7073,12 +7073,11 @@ input.icon {
 
 span.icon {
   position: absolute;
-  margin-left: 0px;
-  height: 100%;
   width: 34px;
   color: black;
-  display: flex;
-  align-items: center;
   z-index: 10; }
+
+.search-card {
+  min-width: 200px; }
 
 /*# sourceMappingURL=style.css.map */
