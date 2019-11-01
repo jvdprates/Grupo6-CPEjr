@@ -50,7 +50,9 @@ router.get('/registrar', function(req, res, next) {
   res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout2' });
 });
 
-
+router.get('/redefinir-senha', function(req, res, next) {
+  res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });
+});
 
 
 module.exports = router;
