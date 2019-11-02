@@ -15,17 +15,17 @@ router.post('/index', function(req, res, next) {
   console.log("Alou alou");
   console.log(user.username);
   console.log(user.password);
-  // firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
+  res.redirect('/1aba')
+  // firebase.auth().createUserWithEmailAndPassword(user.username, user.password).then((fIREBASE) => {
   // console.log("_________________________________________________________________________________________________");
   // console.log(fIREBASE);
   // console.log("_________________________________________________________________________________________________");
   // console.log(fIREBASE.user.uid);
   // console.log("_________________________________________________________________________________________________");
-  res.redirect('/1aba');
+  // res.redirect('/1aba');
   // }).catch((error) => {
   // console.log(error);
   // res.redirect('/error');
-  // });
 });
 
 
@@ -49,6 +49,30 @@ router.get('/esqueci-minha-senha', function(req, res, next) {
 router.get('/registrar', function(req, res, next) {
   res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout2' });
 });
+
+
+router.post('/registrar', function(req, res, next) {
+  const user = req.body.user;
+  console.log(req.body);
+  console.log("KKKKKK hello world");
+  console.log(req.body.user);
+  console.log("Alou alou");
+  console.log(user.email);
+  console.log(user.password);
+  //firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+  res.redirect('/');
+  /* .then((fIREBASE) => { */
+  // console.log("_________________________________________________________________________________________________");
+  // console.log(fIREBASE);
+  // console.log("_________________________________________________________________________________________________");
+  // console.log(fIREBASE.user.uid);
+  // console.log("_________________________________________________________________________________________________");
+  // res.redirect('/1aba');
+  // }).catch((error) => {
+  // console.log(error);
+  // res.redirect('/error');
+});
+
 
 router.get('/redefinir-senha', function(req, res, next) {
   res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });

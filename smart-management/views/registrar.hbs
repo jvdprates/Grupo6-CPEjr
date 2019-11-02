@@ -1,38 +1,48 @@
 <html>
 
-<head>
-  <meta charset= "utf-8">
-</head>
+  <head>
+    <meta charset= "utf-8">
+  </head>
 
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <img src="imagens/logo.png" width="200px" height="200px" />
-        <h1>Registrar:</h1>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <div class="col-sm-4>"></div>
+          <img src="imagens/logo.png" width="200px" height="200px"/>
+        </div>
+        <div class="col-sm-12 text-center">
+          <h1>Registrar:</h1>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-      <div class="row col-sm-12">
-          <div class="col-sm-4"></div>
-          <div class="col-sm-4">
-              <form action="/index" method="post">
-                  <div class="form-group">
-                      <label for="email">Endereço de email:</label>
-                      <input type="email" name="user[username]" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                      <label for="pwd">Senha:</label>
-                      <input type="password" name="user[password]" class="form-control" id="pwd">
-                  </div>
-                  <div class="form-group">
-                      <label for="pwd">Confirmar senha:</label>
-                      <input type="password" name="user[password]" class="form-control" id="pwd">
-                  </div>
-                  <button type="button" class="btn btn-success" onclick="location.href='/'">Enviar</button>
 
-                  <div class="checkbox">
-</body>
+    <div class="container">
+      <div class="row col-sm-12">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <form action="/registrar" method="post">
+            <fieldset>
+              <div class="form-group">
+                  <label for="email">Endereço de email:</label>
+                  <input type="email" placeholder="Email" name="user[email]" class="form-control" id="email" required>
+              </div>
+              <div class="form-group">
+                  <label for="pwd">Senha:</label>
+                  <input type="password" placeholder="Senha" name="user[password]" class="form-control" id="password" required>
+              </div>
+              <div class="form-group">
+                  <label for="pwd">Confirmar senha:</label>
+                  <input type="password" class="form-control" id="confirm_password" required>
+              </div>
+            </fieldset>
+            <button type="submit" class="btn btn-success">Enviar</button>
+            <div class="checkbox"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 
 </html>

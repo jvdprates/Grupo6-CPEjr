@@ -30,19 +30,21 @@
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                     <form action="/index" method="post">
-                        <div class="form-group">
-                            <label for="email">Endereço de email:</label>
-                            <input type="email" name="user[username]" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Senha:</label>
-                            <input type="password" name="user[password]" class="form-control" id="pwd">
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox">Lembre-se de mim.
-                            </label>
-                        </div>
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="email">Endereço de email:</label>
+                                <input type="email" placeholder="Email" name="user[email]" class="form-control" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Senha:</label>
+                                <input type="password" placeholder="Senha" name="user[password]" class="form-control" id="pwd" required>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">Lembre-se de mim.
+                                </label>
+                            </div>
+                        </fieldset>
                         <button type="submit" class="btn btn-success">Enviar</button>
                         <button type="button" class="btn btn-success" onclick="location.href='esqueci-minha-senha'">Esqueci minha senha</button>
                         <button type="button" class="btn btn-success" onclick="location.href='registrar'">Registrar</button>
