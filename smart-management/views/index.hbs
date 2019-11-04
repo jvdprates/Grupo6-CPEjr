@@ -45,13 +45,37 @@
                                 </label>
                             </div>
                         </fieldset>
-                        <button type="submit" class="btn btn-success">Enviar</button>
+                        <button type="submit" class="btn btn-success" id="loginUserButton">Login</button>
                         <button type="button" class="btn btn-success" onclick="location.href='esqueci-minha-senha'">Esqueci minha senha</button>
                         <button type="button" class="btn btn-success" onclick="location.href='registrar'">Registrar</button>
                     </form>
                 </div>
             </div>
         </div>
+        <script src="js/authenticaton.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+            <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+              apiKey: "AIzaSyC-jzRD-IRjrYWElxc0r-d2HhS27XPF2nw",
+              authDomain: "stocks-compane.firebaseapp.com",
+              databaseURL: "https://stocks-compane.firebaseio.com",
+              projectId: "stocks-compane",
+              storageBucket: "stocks-compane.appspot.com",
+              messagingSenderId: "33116879071",
+              appId: "1:33116879071:web:327932d7171d2645f6916a",
+              measurementId: "G-W4X0SH9DC5"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+        </script>
     </body>
 
 </html>

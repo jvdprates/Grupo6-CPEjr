@@ -7,27 +7,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Stocks', layout: 'layout2' });
 });
 
-router.post('/index', function(req, res, next) {
-  const user = req.body.user;
-  console.log(req.body);
-  console.log("KKKKKK hello world");
-  console.log(req.body.user);
-  console.log("Alou alou");
-  console.log(user.username);
-  console.log(user.password);
-  res.redirect('/1aba')
-  // firebase.auth().createUserWithEmailAndPassword(user.username, user.password).then((fIREBASE) => {
-  // console.log("_________________________________________________________________________________________________");
-  // console.log(fIREBASE);
-  // console.log("_________________________________________________________________________________________________");
-  // console.log(fIREBASE.user.uid);
-  // console.log("_________________________________________________________________________________________________");
-  // res.redirect('/1aba');
-  // }).catch((error) => {
-  // console.log(error);
-  // res.redirect('/error');
-});
-
 
 router.get('/1aba', function(req, res, next) {
   res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout'});
@@ -54,12 +33,26 @@ router.get('/registrar', function(req, res, next) {
 router.post('/registrar', function(req, res, next) {
   const user = req.body.user;
   console.log("----------------------------------------------------------------------------");
-console.log(user.email);
+  console.log(user.email);
   firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
+      console.log("Usuario registrado");
      res.redirect('/');
-   }).catch((error) => {
-   console.log(error);
-   res.redirect('/error');
+    }).catch((error) => {
+    console.log(error);
+    res.redirect('/error');
+});
+});
+
+router.post('/index', function(req, res, next) {
+  const user = req.body.user;
+  console.log("auauauauauuauauau");
+    console.log(user.email);
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
+       res.redirect('/1aba');
+      }).catch((error) => {
+      console.log(error);
+      res.redirect('/error');
+// ...
 });
 });
 
