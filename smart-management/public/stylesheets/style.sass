@@ -1,7 +1,12 @@
+$primary: #459124
+$body-bg: #0f100f
+$body-color: #0f100f
+
 @import ../bootstrap/scss/bootstrap.scss
 
 body
   padding: 50px
+  padding-top: 70px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 
 html
@@ -10,53 +15,18 @@ html
 a
   color: #00B7FF
 
-.Botao_pagina:hover
-  background-color: black
-  color: white
-  height: 30px
-  border: dotted
-
-.Botao_pagina
-  height: 30px
-  width: 32%
-  color: black
-  background-color: yellow
-  font: 20px "Times New Roman"
-
-
-.Botao_gif:hover
-  color: transparent
-  background-color: black
-  border: double
-  background-image: url('https://media.giphy.com/media/5zI213WKIL2uI/giphy.gif')
-
-.Botao_gif
-  font: 30px "Arial"
-  height: 350px
-  width: 300px
-  color: black
-  background-color: blue
-
-.verde
-    background-color: #7abd6a
-    color: #7abd6a
-
-.enter
-  margin-top: 50px
-
-.corpo
-  background-color: #0f100f
-  color: white
-  height: 100%
-
-input.icon
-  padding-left: 34px
-
-span.icon
-  position: absolute
-  width: 34px
-  color: black
-  z-index: 10
-
 .search-card
   min-width: 200px
+  border-radius: 0.25rem !important
+
+span.icon
+  width: 30px
+
+div.icon
+  border-top-left-radius: 0.2rem !important
+  border-bottom-left-radius: 0.2rem !important
+
+input.icon:focus
+  outline: 0 !important
+  border-color: initial
+  box-shadow: none
