@@ -26,23 +26,46 @@
             <fieldset>
               <div class="form-group">
                   <label for="email">Endereço de email:</label>
-                  <input type="email" placeholder="Email" name="user[email]" class="form-control" id="email" required>
+                  <input type="email" placeholder="Email" name="user[email]" class="form-control" id="emailInput" required>
               </div>
               <div class="form-group">
                   <label for="pwd">Senha:</label>
-                  <input type="password" placeholder="Senha" name="user[password]" class="form-control" id="password" required>
+                  <input type="password" placeholder="Senha" name="user[password]" class="form-control" id="passwordInput" required>
               </div>
               <div class="form-group">
                   <label for="pwd">Confirmar senha:</label>
-                  <input type="password" class="form-control" id="confirm_password" required>
               </div>
             </fieldset>
-            <button type="submit" class="btn btn-success">Enviar</button>
+            <button type="submit" class="btn btn-lg btn-block btn-success" id="createUserButton">Criar Nova Conta</button>
             <div class="checkbox"></div>
           </form>
-        </div>
+  <button type="button" class="btn btn-success" onclick="location.href='./'">Voltar</button>
       </div>
     </div>
+    <script src="js/authenticaton.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyC-jzRD-IRjrYWElxc0r-d2HhS27XPF2nw",
+          authDomain: "stocks-compane.firebaseapp.com",
+          databaseURL: "https://stocks-compane.firebaseio.com",
+          projectId: "stocks-compane",
+          storageBucket: "stocks-compane.appspot.com",
+          messagingSenderId: "33116879071",
+          appId: "1:33116879071:web:327932d7171d2645f6916a",
+          measurementId: "G-W4X0SH9DC5"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 
 </html>
