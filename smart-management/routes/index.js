@@ -1,23 +1,59 @@
 var express = require('express');
 var router = express.Router();
 const firebase = require('firebase');
+const Product = require('../models/product');
 
 /* GET home page. */
+
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Stocks', layout: 'layout2' });
 });
 
+router.get('/adicionar', function(req, res, next) {
+  res.render('product', { title: 'Adicionar à carteira', layout: 'layout2' });
+});
 
-router.get('/1aba', function(req, res, next) {
-  res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout'});
+router.post('/adicionar', function(req, res, next) {
+  console.log("teste");
+  const newProduct = {
+    sigla: req.body.sigla,
+    quantidade: req.body.quantidade,
+    valor: req.body.valor,
+    data: req.body.data
+  }
+  Product.createNew(newProduct).then((result)=>{
+    console.log(result);
+    res.redirect('/adicionar');
+  }).catch(err=>{
+    console.log(err);
+    res.redirect('/adicionar');
+  });
+});
+
+/*router.get('/allProducts', function(req, res, next) {
+ Product.getAll().then((products) =>{
+   res.render('allProducts', { title: 'product', products });
+ }).catch(err =>{
+   res.redirect('/product');
+ });
+});*/
+
+
+router.get('/minha-carteira', function(req, res, next) {
+   Product.getAll().then((products) =>{
+     res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout', products});
+  }).catch(err =>{
+    res.redirect('/adicionar');
+  });
 });
 
 
-router.get('/2aba', function(req, res, next) {
+router.get('/minha-rentabilidade', function(req, res, next) {
   res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout' });
 });
 
-router.get('/3aba', function(req, res, next) {
+router.get('/pesquisa', function(req, res, next) {
   res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout' });
 });
 
