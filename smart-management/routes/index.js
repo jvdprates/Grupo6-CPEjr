@@ -7,11 +7,11 @@ const Product = require('../models/product');
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Stocks', layout: 'layout2' });
+  res.render('index', { title: 'Stocks', layout: 'layout' });
 });
 
 router.get('/adicionar', function(req, res, next) {
-  res.render('product', { title: 'Adicionar à carteira', layout: 'layout2' });
+  res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
 });
 
 router.post('/adicionar', function(req, res, next) {
@@ -42,7 +42,7 @@ router.post('/adicionar', function(req, res, next) {
 
 router.get('/minha-carteira', function(req, res, next) {
    Product.getAll().then((products) =>{
-     res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout', products});
+     res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
   }).catch(err =>{
     res.redirect('/adicionar');
   });
@@ -50,19 +50,19 @@ router.get('/minha-carteira', function(req, res, next) {
 
 
 router.get('/minha-rentabilidade', function(req, res, next) {
-  res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout' });
+  res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
 });
 
 router.get('/pesquisa', function(req, res, next) {
-  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout' });
+  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2' });
 });
 
 router.get('/esqueci-minha-senha', function(req, res, next) {
-  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout2' });
+  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout' });
 });
 
 router.get('/registrar', function(req, res, next) {
-  res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout2' });
+  res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout' });
 });
 
 
