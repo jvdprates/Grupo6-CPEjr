@@ -85,7 +85,8 @@ router.post('/registrar', function(req, res, next) {
   const user = req.body.user;
   console.log("----------------------------------------------------------------------------");
   console.log(user.email);
-  // if (user.email == user.confirm-email){  condicao para confirmacao de email.
+  if ( !(user.password.localeCompare(user.confirmPassword) )){
+    console.log("Entrou no IF corretamente");
   firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
     console.log("Usuario registrado");
     res.redirect('/');
@@ -93,10 +94,10 @@ router.post('/registrar', function(req, res, next) {
     console.log(error);
     res.redirect('/error');
   });
-  // } else {
-  //   console.log("Senha nao bate com confirmacao.");
-  //   res.redirect('/registrar');
-  // }    Tentativa de implementar a confirmacao de email, como "registrar" nao esta funcionando nao sei se da certo, portanto esta comentado.
+  } else {
+    console.log("Senha não bateu com a confirmacao de senha.");
+    res.redirect('/registrar');
+  }   
 });
 
 
