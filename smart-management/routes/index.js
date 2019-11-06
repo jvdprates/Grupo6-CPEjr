@@ -24,7 +24,7 @@ router.post('/adicionar', function(req, res, next) {
   }
   Product.createNew(newProduct).then((result)=>{
     console.log(result);
-    res.redirect('/adicionar');
+    res.redirect('/minha-carteira');
   }).catch(err=>{
     console.log(err);
     res.redirect('/adicionar');
@@ -84,7 +84,7 @@ router.post('/index', function(req, res, next) {
   console.log("auauauauauuauauau");
     console.log(user.email);
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
-       res.redirect('/1aba');
+       res.redirect('/minha-carteira');
       }).catch((error) => {
       console.log(error);
       res.redirect('/error');
