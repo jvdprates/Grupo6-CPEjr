@@ -24,7 +24,7 @@ router.post('/adicionar', function(req, res, next) {
   }
   Product.createNew(newProduct).then((result)=>{
     console.log(result);
-    res.redirect('/adicionar');
+    res.redirect('/minha-carteira');
   }).catch(err=>{
     console.log(err);
     res.redirect('/adicionar');
