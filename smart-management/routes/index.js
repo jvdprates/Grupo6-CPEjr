@@ -10,9 +10,45 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Stocks', layout: 'layout' });
 });
 
+
 router.get('/adicionar', function(req, res, next) {
   res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
 });
+
+
+router.get('/minha-carteira', function(req, res, next) {
+   Product.getAll().then((products) =>{
+    res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
+  }).catch(err =>{
+    res.redirect('/adicionar');
+  });
+});
+
+
+router.get('/minha-rentabilidade', function(req, res, next) {
+  res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
+});
+
+
+router.get('/pesquisa', function(req, res, next) {
+  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2' });
+});
+
+
+router.get('/esqueci-minha-senha', function(req, res, next) {
+  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout' });
+});
+
+
+router.get('/registrar', function(req, res, next) {
+  res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout' });
+});
+
+
+router.get('/redefinir-senha', function(req, res, next) {
+  res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });
+});
+
 
 router.post('/adicionar', function(req, res, next) {
   console.log("teste");
@@ -31,38 +67,17 @@ router.post('/adicionar', function(req, res, next) {
   });
 });
 
-/*router.get('/allProducts', function(req, res, next) {
- Product.getAll().then((products) =>{
-   res.render('allProducts', { title: 'product', products });
- }).catch(err =>{
-   res.redirect('/product');
- });
-});*/
 
-
-router.get('/minha-carteira', function(req, res, next) {
-   Product.getAll().then((products) =>{
-     res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
-  }).catch(err =>{
-    res.redirect('/adicionar');
-  });
-});
-
-
-router.get('/minha-rentabilidade', function(req, res, next) {
-  res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
-});
-
-router.get('/pesquisa', function(req, res, next) {
-  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2' });
-});
-
-router.get('/esqueci-minha-senha', function(req, res, next) {
-  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout' });
-});
-
-router.get('/registrar', function(req, res, next) {
-  res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout' });
+router.post('/index', function(req, res, next) {
+  const user = req.body.user;
+  console.log("auauauauauuauauau");
+    console.log(user.email);
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
+      res.redirect('/minha-carteira');
+    }).catch((error) => {
+      console.log(error);
+      res.redirect('/error');
+    });
 });
 
 
@@ -72,34 +87,16 @@ router.post('/registrar', function(req, res, next) {
   console.log(user.email);
   // if (user.email == user.confirm-email){  condicao para confirmacao de email.
   firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
-      console.log("Usuario registrado");
-     res.redirect('/');
-    }).catch((error) => {
+    console.log("Usuario registrado");
+    res.redirect('/');
+  }).catch((error) => {
     console.log(error);
     res.redirect('/error');
-    });
+  });
   // } else {
   //   console.log("Senha nao bate com confirmacao.");
   //   res.redirect('/registrar');
   // }    Tentativa de implementar a confirmacao de email, como "registrar" nao esta funcionando nao sei se da certo, portanto esta comentado.
-});
-
-router.post('/index', function(req, res, next) {
-  const user = req.body.user;
-  console.log("auauauauauuauauau");
-    console.log(user.email);
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
-       res.redirect('/minha-carteira');
-      }).catch((error) => {
-      console.log(error);
-      res.redirect('/error');
-// ...
-});
-});
-
-
-router.get('/redefinir-senha', function(req, res, next) {
-  res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });
 });
 
 
