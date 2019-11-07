@@ -1,57 +1,87 @@
 <div class="input-group">
-    <span class="input-group-append">
-      <div class="input-group-text bg-light border-right-0 border px-2 icon"><i class="material-icons">search</i></div>
-    </span>
-      <input type="text" class="form-control bg-light border-left-0 border icon pl-0" placeholder="Pesquisar ações ou fundos" />
+  <span class="input-group-append">
+    <div class="input-group-text bg-light border-right-0 border px-2 icon"><i class="material-icons">search</i></div>
+  </span>
+  <input type="text" class="form-control bg-light border-left-0 border icon pl-0" placeholder="Pesquisar ações ou fundos" />
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-dark">
+      <form action="/adicionar" method="post">
+        <div class="modal-header" style="border-color: #454d55">
+          <h5 class="modal-title" id="ModalLongTitle">Adicionar para a carteira</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="text-shadow: 0 0px 0;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" name="sigla" placeholder="Sigla da ação">
+          <br>
+          <input type="number" name="quantidade" placeholder="Quantidade">
+          <br>
+          <input type="number" name="valor" placeholder="Valor do papel">
+          <br>
+          <input type="date" name="data" placeholder="Data da compra">
+          <br>
+        </div>
+        <div class="modal-footer" style="border-color: #454d55">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <div class="card-group mt-2">
-    <div class="card text-white bg-dark search-card m-1">
-      <div class="card-header">
-        Nome da ação
-      </div>
-      <div class="card-body text-center">
-        <p class="card-text">Informações</p>
-        <a href="#" class="btn btn-primary">Detalhes</a>
-        <a href="adicionar" class="btn btn-secondary p-0" title="Adicionar para a carteira" style="height: 38px; width: 38px;">
-          <i class="material-icons" style="line-height: unset;">note_add</i>
-        </a>
-      </div>
+  <div class="card text-white bg-dark search-card m-1">
+    <div class="card-header">
+      Nome da ação
     </div>
-    <div class="card text-white bg-dark search-card m-1">
-      <div class="card-header">
-        Nome da ação
-      </div>
-      <div class="card-body text-center">
-        <p class="card-text">Informações</p>
-        <a href="#" class="btn btn-primary">Detalhes</a>
-        <a href="adicionar" class="btn btn-secondary p-0" title="Adicionar para a carteira" style="height: 38px; width: 38px;">
-          <i class="material-icons" style="line-height: unset;">note_add</i>
-        </a>
-      </div>
+    <div class="card-body text-center">
+      <p class="card-text">Informações</p>
+      <a href="#" class="btn btn-primary">Detalhes</a>
+      <a class="btn btn-secondary p-0" title="Adicionar para a carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 38px; width: 38px;">
+        <i class="material-icons" style="line-height: unset;">note_add</i>
+      </a>
     </div>
-    <div class="card text-white bg-dark search-card m-1">
-      <div class="card-header">
-        Nome da ação
-      </div>
-      <div class="card-body text-center">
-        <p class="card-text">Informações</p>
-        <a href="#" class="btn btn-primary">Detalhes</a>
-        <a href="adicionar" class="btn btn-secondary p-0" title="Adicionar para a carteira" style="height: 38px; width: 38px;">
-          <i class="material-icons" style="line-height: unset;">note_add</i>
-        </a>
-      </div>
+  </div>
+  <div class="card text-white bg-dark search-card m-1">
+    <div class="card-header">
+      Nome da ação
     </div>
-    <div class="card text-white bg-dark search-card m-1">
-      <div class="card-header">
-        Nome da ação
-      </div>
-      <div class="card-body text-center">
-        <p class="card-text">Informações</p>
-        <a href="#" class="btn btn-primary">Detalhes</a>
-        <a href="#" class="btn btn-secondary p-0" title="Adicionar para a carteira" style="height: 38px; width: 38px;">
-          <i class="material-icons" style="line-height: unset;">note_add</i>
-        </a>
-      </div>
+    <div class="card-body text-center">
+      <p class="card-text">Informações</p>
+      <a href="#" class="btn btn-primary">Detalhes</a>
+      <a class="btn btn-secondary p-0" title="Adicionar para a carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 38px; width: 38px;">
+        <i class="material-icons" style="line-height: unset;">note_add</i>
+      </a>
     </div>
+  </div>
+  <div class="card text-white bg-dark search-card m-1">
+    <div class="card-header">
+      Nome da ação
+    </div>
+    <div class="card-body text-center">
+      <p class="card-text">Informações</p>
+      <a href="#" class="btn btn-primary">Detalhes</a>
+      <a class="btn btn-secondary p-0" title="Adicionar para a carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 38px; width: 38px;">
+        <i class="material-icons" style="line-height: unset;">note_add</i>
+      </a>
+    </div>
+  </div>
+  <div class="card text-white bg-dark search-card m-1">
+    <div class="card-header">
+      Nome da ação
+    </div>
+    <div class="card-body text-center">
+      <p class="card-text">Informações</p>
+      <a href="#" class="btn btn-primary">Detalhes</a>
+      <a class="btn btn-secondary p-0" title="Adicionar para a carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 38px; width: 38px;">
+        <i class="material-icons" style="line-height: unset;">note_add</i>
+      </a>
+    </div>
+  </div>
 </div>
