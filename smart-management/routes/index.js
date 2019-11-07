@@ -79,15 +79,22 @@ router.post('/index', function(req, res, next) {
   title: 'Stocks',
   message: user.email+', seja bem vindo!' ,
   sound: false,
+  icon: '/images/logo.png',
 });
     }).catch((error) => {
+      switch (error.code) {
+        case 'auth/wrong-password':
+          req.flash('danger', 'Senha incorreta');
+          break;
+      }
       console.log(error);
       res.redirect('./');
-      notifier.notify({
-  title: 'Stocks',
-  message: 'Email ou senha incorretos',
-  //icon: path.join(__dirname, 'imagens/stocks.jpg'),
-});
+
+
+//       notifier.notify({
+//   title: 'Stocks',
+//   message: 'Email ou senha incorretos',
+// });
     });
 });
 

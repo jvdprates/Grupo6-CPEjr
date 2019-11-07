@@ -7047,4 +7047,10 @@ input.icon:focus {
   border-color: initial;
   box-shadow: none; }
 
+.webvet-alert {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  margin-left: 10px; }
+
 /*# sourceMappingURL=style.css.map */
