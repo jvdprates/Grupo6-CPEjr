@@ -1,72 +1,23 @@
-<div class="text-center ">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <img src="imagens/logo.png" width="200px" height="200px" />
-            </div>
-        </div>
+<div class="container-fluid" style="max-width: 350px; min-width: 200px;">
+  <div class="row">
+    <img class="mx-auto" src="imagens/logo.png" width="200px" height="200px" />
+  </div>
+  <h1>Login:</h1>
+  <form action="/index" method="post" class="w-100" id="meuForm">
+    <fieldset>
+      <div class="form-group">
+        <label for="email">Endereço de email:</label>
+        <input type="email" placeholder="Email" name="user[email]" class="form-control" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Senha:</label>
+        <input type="password" placeholder="Senha" name="user[password]" class="form-control" id="pwd" required>
+      </div>
+    </fieldset>
+    <div class="mb-2">
+      <button type="submit" class="btn btn-primary" id="loginUserButton">Login</button>
+      <button type="button" class="btn btn-primary" onclick="location.href='registrar'">Registrar</button>
     </div>
-
-    <div class="container">
-        <div class="row col-sm-12 p-0">
-            <div class="col-sm-4 p-0"></div>
-            <div class="col-sm-4 p-0">
-                <h1>Login:</h1>
-            </div>
-            <div class="col-sm-4"></div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row col-sm-12">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <form action="/index" method="post" id="meuForm">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="email">Endereço de email:</label>
-                            <input type="email" placeholder="Email" name="user[email]" class="form-control" id="email"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Senha:</label>
-                            <input type="password" placeholder="Senha" name="user[password]" class="form-control"
-                                id="pwd" required>
-                        </div>
-                    </fieldset>
-                    <div class="mb-2">
-                        <button type="submit" class="btn btn-primary" id="loginUserButton">Login</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="location.href='registrar'">Registrar</button>
-                    </div>
-                    <a class="text-light" href="esqueci-minha-senha">Esqueci minha senha</a>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script src="js/authenticaton.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-             https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyC-jzRD-IRjrYWElxc0r-d2HhS27XPF2nw",
-            authDomain: "stocks-compane.firebaseapp.com",
-            databaseURL: "https://stocks-compane.firebaseio.com",
-            projectId: "stocks-compane",
-            storageBucket: "stocks-compane.appspot.com",
-            messagingSenderId: "33116879071",
-            appId: "1:33116879071:web:327932d7171d2645f6916a",
-            measurementId: "G-W4X0SH9DC5"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-    </script>
+    <a class="text-light" href="esqueci-minha-senha">Esqueci minha senha</a>
+  </form>
 </div>
