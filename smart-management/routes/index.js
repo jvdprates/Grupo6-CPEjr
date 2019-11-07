@@ -3,6 +3,7 @@ var router = express.Router();
 const firebase = require('firebase');
 const Product = require('../models/product');
 const notifier = require('node-notifier');
+const path = require('path');
 
 /* GET home page. */
 
@@ -76,7 +77,7 @@ router.post('/index', function(req, res, next) {
       res.redirect('/minha-carteira');
       notifier.notify({
   title: 'Stocks',
-  message: 'Seja bem vindo!',
+  message: user.email+', seja bem vindo!' ,
   sound: false,
 });
     }).catch((error) => {
@@ -84,7 +85,8 @@ router.post('/index', function(req, res, next) {
       res.redirect('./');
       notifier.notify({
   title: 'Stocks',
-  message: 'Email ou senha incorretos'
+  message: 'Email ou senha incorretos',
+  //icon: path.join(__dirname, 'imagens/stocks.jpg'),
 });
     });
 });
@@ -101,8 +103,7 @@ router.post('/registrar', function(req, res, next) {
     res.redirect('./');
     notifier.notify({
 title: 'Stocks',
-message: 'Usuário registrado',
-icon: path.join(__dirname, 'logo.png'),
+message: 'Usuário registrado: ' +user.email,
 });
   }).catch((error) => {
     console.log(error);
