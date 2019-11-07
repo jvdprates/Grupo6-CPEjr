@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const firebase = require('firebase');
 const Product = require('../models/product');
+const notifier = require('node-notifier');
 
 /* GET home page. */
 
@@ -70,13 +71,21 @@ router.post('/adicionar', function(req, res, next) {
 
 router.post('/index', function(req, res, next) {
   const user = req.body.user;
-  console.log("auauauauauuauauau");
     console.log(user.email);
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
       res.redirect('/minha-carteira');
+      notifier.notify({
+  title: 'Stocks',
+  message: 'Seja bem vindo!',
+  sound: false,
+});
     }).catch((error) => {
       console.log(error);
-      res.redirect('/error');
+      res.redirect('./');
+      notifier.notify({
+  title: 'Stocks',
+  message: 'Email ou senha incorretos'
+});
     });
 });
 
@@ -89,15 +98,28 @@ router.post('/registrar', function(req, res, next) {
     console.log("Entrou no IF corretamente");
   firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
     console.log("Usuario registrado");
-    res.redirect('/');
+    res.redirect('./');
+    notifier.notify({
+title: 'Stocks',
+message: 'Usuário registrado',
+icon: path.join(__dirname, 'logo.png'),
+});
   }).catch((error) => {
     console.log(error);
-    res.redirect('/error');
+    res.redirect('/registrar');
+    notifier.notify({
+title: 'Stocks',
+message: 'Insira um endereço de email válido'
+});
   });
   } else {
     console.log("Senha não bateu com a confirmacao de senha.");
+    notifier.notify({
+  title: 'Stocks',
+  message: 'Senha não bateu com a confirmacao de senha'
+  });
     res.redirect('/registrar');
-  }   
+  }
 });
 
 
