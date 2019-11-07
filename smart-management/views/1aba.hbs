@@ -21,25 +21,27 @@
   </thead>
   <tbody>
     {{#each products}}
-    <tr>
-      <td>{{sigla}}</td>
-      <td>{{quantidade}}</td>
-      <td>{{valor}}</td>
-      <td>{{data}}</td>
-      <td>
-        <a href="#" class="btn btn-primary p-0" title="Adicionar para a carteira" data-toggle="collapse"
-          href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
-          style="height: 38px; width: 38px;">
-          <i class="material-icons" style="line-height: unset;">add</i>
-        </a>
-      </td>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-          keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        </div>
-      </div>
-    </tr>
+      <tr>
+        <td>{{sigla}}</td>
+        <td>{{quantidade}}</td>
+        <td>R${{valor}}</td>
+        <td>{{data}}</td>
+        <td>
+          <a class="btn btn-primary p-0" title="Adicionar para a carteira" data-toggle="collapse" href="#collapse{{sigla}}" role="button" aria-expanded="false" aria-controls="collapseExample" style="height: 38px; width: 38px;">
+            <i class="material-icons" style="line-height: unset;">add</i>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="100" class="p-0 border-top-0">
+          <div class="collapse" id="collapse{{sigla}}">
+            <div class="p-2">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+              keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
+          </div>
+        </td>
+      </tr>
     {{/each}}
   </tbody>
 </table>
