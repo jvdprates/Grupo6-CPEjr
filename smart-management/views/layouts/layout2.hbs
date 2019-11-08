@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <meta charset= "utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="imagens/favicon.ico">
-  </head>
+<head>
+  <title>{{title}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="shortcut icon" type="image/x-icon" href="imagens/favicon.ico">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
 
-  <body class="text-light h-100">
-      <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="/">
-          <img src="imagens/logo.png" class="d-inline-block" width="30" height="30" alt="Logo">
-          Stocks
-        </a>
-        <ul class="nav navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="/">Login</a></li>
-          <li class="nav-item"><a class="nav-link" href="minha-carteira">Minha Carteira</a></li>
-          <li class="nav-item"><a class="nav-link" href="minha-rentabilidade">Rentabilidade da Minha Carteira</a></li>
-          <li class="nav-item"><a class="nav-link" href="pesquisa">Pesquisa de Investimentos</a></li>
-        </ul>
-      </nav>
+<body class="text-light h-100">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="/">
+      <img src="imagens/logo.png" class="d-inline-block" width="30" height="30" alt="Logo">
+      Stocks
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="minha-carteira">Minha Carteira</a></li>
+        <li class="nav-item"><a class="nav-link" href="minha-rentabilidade">Rentabilidade da Minha Carteira</a></li>
+        <li class="nav-item"><a class="nav-link" href="pesquisa">Pesquisa de Investimentos</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-        {{{body}}}
+  {{{body}}}
 
-  </body>
-
+</body>
 </html>
