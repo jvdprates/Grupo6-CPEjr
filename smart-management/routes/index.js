@@ -52,13 +52,15 @@ router.get('/redefinir-senha', function(req, res, next) {
 });
 
 
-router.post('/adicionar', function(req, res, next) {
+router.post('/pesquisa', function(req, res, next) {
   console.log("teste");
   const newProduct = {
     // sigla: req.body.sigla,
     quantity: req.body.quantity,
     investedAmount: req.body.investedAmount,
-    date: req.body.date
+    date: req.body.date,
+    absolutRevenue: 100,
+    totalinvestedAmount: req.body.quantity*req.body.investedAmount
   }
   Product.createNew(newProduct).then((result)=>{
     console.log(result);
