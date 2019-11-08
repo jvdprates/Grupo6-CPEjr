@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  sigla:{
-    type: String,
-    required: true
-  },
-  quantidade:{
+  // abbreviaton:{
+  //   type: String,
+  //   required: true
+  // },
+  quantity:{
     type: Number,
     required: true
   },
-  valor:{
+  investedAmount:{
     type: Number,
     required: true
   },
-  data:{
+  date:{
     type: Date,
     required: true
   },
