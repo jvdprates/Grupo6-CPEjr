@@ -22,7 +22,7 @@ router.get('/minha-carteira', function(req, res, next) {
    Product.getAll().then((products) =>{
     res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
   }).catch(err =>{
-    res.redirect('/adicionar');
+    res.redirect('./');
   });
 });
 
@@ -55,17 +55,17 @@ router.get('/redefinir-senha', function(req, res, next) {
 router.post('/adicionar', function(req, res, next) {
   console.log("teste");
   const newProduct = {
-    sigla: req.body.sigla,
-    quantidade: req.body.quantidade,
-    valor: req.body.valor,
-    data: req.body.data
+    // sigla: req.body.sigla,
+    quantity: req.body.quantity,
+    investedAmount: req.body.investedAmount,
+    date: req.body.date
   }
   Product.createNew(newProduct).then((result)=>{
     console.log(result);
-    res.redirect('/minha-carteira');
+    res.redirect('/pesquisa');
   }).catch(err=>{
     console.log(err);
-    res.redirect('/adicionar');
+    res.redirect('./');
   });
 });
 
