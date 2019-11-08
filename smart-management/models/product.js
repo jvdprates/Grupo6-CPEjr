@@ -13,6 +13,18 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  totalinvestedAmount:{
+    type: Number,
+  },
+  currentAmount:{
+    type: Number,
+  },
+  absolutRevenue:{
+    type: Number,
+  },
+  percentRevenue:{
+    type: Number,
+  },
   date:{
     type: Date,
     required: true
