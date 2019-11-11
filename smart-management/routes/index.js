@@ -71,6 +71,16 @@ router.post('/pesquisa', function(req, res, next) {
   });
 });
 
+router.post('/esqueci-minha-senha', function(req, res, next){
+  const user = req.body.user;
+    console.log(user.email);
+    firebase.auth().sendPasswordResetEmail(user.email).then((fIREBASE) => {
+      res.redirect('./');
+
+    }).catch((error) => {
+
+    })
+});
 
 router.post('/index', function(req, res, next) {
   const user = req.body.user;
