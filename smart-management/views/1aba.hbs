@@ -37,7 +37,7 @@
 
 <table class="table table-dark">
   <thead>
-    <tr>
+    <tr class="text-center">
       <th scope="col">Sigla</th>
       <th scope="col">Quantidade</th>
       <th scope="col">Redimento absoluto</th>
@@ -51,46 +51,51 @@
   </thead>
   <tbody>
     {{#each products}}
-      <tr>
-        <td></td>
-        <td>{{quantity}}</td>
-        <td>R$ </td>
-        <td> %</td>
+      <tr class="text-center">
+        <td class="align-middle"></td>
+        <td class="align-middle">{{quantity}}</td>
+        <td class="align-middle">R$ 00,00</td>
+        <td class="align-middle">0,00 %</td>
         <!-- <td>{{absolutRevenue}}</td>
         <td>{{quantity}}</td>
         <td>R$ {{investedAmount}}</td>
         <td>{{date}}</td> -->
         <td>
-          <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{sigla}}" role="button" aria-expanded="false" aria-controls="collapseExample" style="height: 38px; width: 38px;">
-            <i class="material-icons" style="line-height: unset;">add</i>
+          <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{sigla}}" role="button" aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
+            <i class="material-icons" style="vertical-align: middle;">add</i>
           </a>
         </td>
         <td>
-          <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 38px; width: 38px;">
-          <i class="material-icons" style="line-height: unset;">close</i>
+          <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 27px; width: 27px;">
+          <i class="material-icons" style="vertical-align: middle;">close</i>
         </td>
       </tr>
       <tr>
-        <td colspan="100" class="p-0 border-top-0">
+        <td colspan="100" class="p-0 border-top-0" style="background-color: #33373c;">
           <div class="collapse" id="collapse{{sigla}}">
-            <div class="p-2">
+            <div class="row px-2 pb-2 pt-1">
               <div class="col-sm-6">
-                <div class="row">
+                <div class="row justify-content-center">
                   <div class="col-sm-4 text-center">
-                    <p>Valor investido</p>
-                    <p>R$ {{totalinvestedAmount}}</p>
+                    <p class="mb-1">Valor investido</p>
+                    <p>R$ {{formatMoney totalinvestedAmount}}</p>
                   </div>
                   <div class="col-sm-4 text-center">
-                    <p>Valor atual</p>
-                    <p>R$00,00</p>
+                    <p class="mb-1">Valor atual</p>
+                    <p>R$ 00,00</p>
                   </div>
                 </div>
                 <div class="row ml-3 mt-2">
-                  <p>Rendimento da última semana: 0%</p>
+                  <p>Rendimento da última semana: 0,00%</p>
                 </div>
                   <div class="row ml-3">
-                    <p>Data da compra: </p>
-                    <p>{{date}}</p>
+                    <p>Data da compra:&nbsp;</p>
+                    <p>{{formatTime date "MM/DD/YYYY"}}</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="border border-primary h-100 text-center">
+                    Gráfico aqui :)
                   </div>
                 </div>
               </div>

@@ -52,6 +52,20 @@ app.engine('hbs', exphbs({
      this._sections[name] = options.fn(this);
      return null;
    },
+
+   formatTime(date, format){
+     var day = date.getDate();
+     var month = date.getMonth();
+     var year = date.getFullYear();
+
+     return day + '/' + month + '/' + year;
+    },
+
+    formatMoney(value){
+      var value = value.toFixed(2);
+      return value.replace(".", ",");
+     },
+
    // Compare logic
    compare(lvalue, rvalue, options) {
      if (arguments.length < 3) {
