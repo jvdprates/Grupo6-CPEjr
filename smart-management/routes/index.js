@@ -76,9 +76,18 @@ router.post('/esqueci-minha-senha', function(req, res, next){
     console.log(user.email);
     firebase.auth().sendPasswordResetEmail(user.email).then((fIREBASE) => {
       res.redirect('./');
+      notifier.notify({
+        title: 'Stocks',
+        message: 'Email de redefinição enviado para: ' +user.email,
+  });
 
     }).catch((error) => {
-
+      console.log("Email inserido não está no banco de dados")
+      res.redirect('/esqueci-minha-senha');
+      notifier.notify({
+        title: 'Stocks',
+        message: 'Email inserido não está cadastrado: ' +user.email,
+  });
     })
 });
 
