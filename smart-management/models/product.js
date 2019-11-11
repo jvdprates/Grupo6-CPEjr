@@ -5,48 +5,40 @@ const productSchema = new mongoose.Schema({
   //   type: String,
   //   required: true
   // },
-  quantity:{
+  quantity: {
     type: Number,
     required: true
   },
-  investedAmount:{
+  investedAmount: {
     type: Number,
     required: true
   },
-  totalinvestedAmount:{
+  totalinvestedAmount: {
     type: Number,
   },
-  currentAmount:{
+  currentAmount: {
     type: Number,
   },
-  absolutRevenue:{
+  absolutRevenue: {
     type: Number,
   },
-  percentRevenue:{
+  percentRevenue: {
     type: Number,
   },
-  date:{
+  date: {
     type: Date,
     required: true
   },
-}, {timestamps:true});
+}, {
+  timestamps: true
+});
 
 const ProductModel = mongoose.model('ProductIzabelaBrant', productSchema);
 
-class Product{
-  static createNew(product){
-    return new Promise((resolve, reject) =>{
-      ProductModel.create(product).then((result) =>{
-        resolve(result);
-      }).catch(err =>{
-        reject(err);
-      });
-    });
-  }
-
-  static updateById(id, product){
-    return new Promise((resolve, reject) =>{
-      ProductModel.findByIdAndUpdate(product, id).then((result) =>{
+class Product {
+  static createNew(product) {
+    return new Promise((resolve, reject) => {
+      ProductModel.create(product).then((result) => {
         resolve(result);
       }).catch(err => {
         reject(err);
@@ -54,11 +46,21 @@ class Product{
     });
   }
 
-  static getAll(){
+  static updateById(id, product) {
+    return new Promise((resolve, reject) => {
+      ProductModel.findByIdAndUpdate(product, id).then((result) => {
+        resolve(result);
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
+  static getAll() {
     return new Promise((resolve, reject) => {
       ProductModel.find({}).then((results) => {
         resolve(results);
-      }).catch((err) =>{
+      }).catch((err) => {
         reject(err);
       });
     });
