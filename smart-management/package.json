@@ -21,6 +21,8 @@
     "mongoose": "^5.7.8",
     "morgan": "~1.9.1",
     "node-notifier": "^6.0.0",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
   }
 }
