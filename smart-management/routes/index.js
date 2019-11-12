@@ -4,6 +4,8 @@ const firebase = require('firebase');
 const Product = require('../models/product');
 const notifier = require('node-notifier');
 const path = require('path');
+const request = require('request');
+
 
 /* GET home page. */
 
@@ -33,7 +35,7 @@ router.get('/minha-rentabilidade', function(req, res, next) {
 
 
 router.get('/pesquisa', function(req, res, next) {
-  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2' });
+  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2'});
 });
 
 
@@ -51,9 +53,16 @@ router.get('/redefinir-senha', function(req, res, next) {
   res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });
 });
 
+router.post('/pesquisa-search', function(req, res, next) {
+  const keywords = req.body.search;
+  request('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + keywords + '&apikey=5M98NU65NMZOASYR',
+    (error, response, body) => {
+      let results = JSON.parse(body).bestMatches;
+      res.render('partials/card-box-search', {layout: '', results});
+    });
+});
 
-router.post('/pesquisa', function(req, res, next) {
-  console.log("teste");
+router.post('/pesquisa-add', function(req, res, next) {
   const newProduct = {
     // sigla: req.body.sigla,
     quantity: req.body.quantity,
