@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
   if(userSession.userAuthentication == true){
     console.log("Usuário já está logado");
     userSession.userAuthentication = false;
+    userSession.userEmail = "";
     notifier.notify({
       title: 'Stocks',
       message: 'Usuário desconectado',
