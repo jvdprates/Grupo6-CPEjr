@@ -88,6 +88,7 @@ router.post('/esqueci-minha-senha', function(req, res, next){
       notifier.notify({
         title: 'Stocks',
         message: 'Email de redefinição enviado para: ' +user.email,
+        icon: path.join(__dirname, 'logo.png'),
   });
 
     }).catch((error) => {
@@ -96,6 +97,7 @@ router.post('/esqueci-minha-senha', function(req, res, next){
       notifier.notify({
         title: 'Stocks',
         message: 'Email inserido não está cadastrado: ' +user.email,
+        icon: path.join(__dirname, 'logo.png'),
   });
     })
 });
@@ -109,7 +111,7 @@ router.post('/index', function(req, res, next) {
   title: 'Stocks',
   message: user.email+', seja bem vindo!' ,
   sound: false,
-  icon: '/images/logo.png',
+  icon: path.join(__dirname, 'logo.png'),
 });
     }).catch((error) => {
       switch (error.code) {
@@ -141,20 +143,23 @@ router.post('/registrar', function(req, res, next) {
     notifier.notify({
 title: 'Stocks',
 message: 'Usuário registrado: ' +user.email,
+icon: path.join(__dirname, 'logo.png'),
 });
   }).catch((error) => {
     console.log(error);
     res.redirect('/registrar');
     notifier.notify({
 title: 'Stocks',
-message: 'Insira um endereço de email válido'
+message: 'Insira um endereço de email válido',
+icon: path.join(__dirname, 'logo.png'),
 });
   });
   } else {
     console.log("Senha não bateu com a confirmacao de senha.");
     notifier.notify({
   title: 'Stocks',
-  message: 'Senha não bateu com a confirmacao de senha'
+  message: 'Senha não bateu com a confirmacao de senha',
+  icon: path.join(__dirname, 'logo.png'),
   });
     res.redirect('/registrar');
   }
