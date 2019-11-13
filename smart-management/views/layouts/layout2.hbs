@@ -15,7 +15,7 @@
 
 <body class="text-light h-100">
   <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/" onclick="return confirm('Deseja fazer logoff?')">
       <img src="imagens/logo.png" class="d-inline-block" width="30" height="30" alt="Logo">
       Stocks
     </a>
@@ -28,7 +28,7 @@
         <li class="nav-item"><a class="nav-link" href="minha-rentabilidade">Rentabilidade da Minha Carteira</a></li>
         <li class="nav-item"><a class="nav-link" href="pesquisa">Pesquisa de Investimentos</a></li>
         <li class="nav-item">
-          <a class="nav-link" href="/">Sair</a>
+          <a class="nav-link" onclick="return confirm('Deseja fazer logoff?')" href="/">Sair</a>
         </li>
       </ul>
     </div>
