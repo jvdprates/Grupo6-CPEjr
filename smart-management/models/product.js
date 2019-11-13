@@ -29,6 +29,10 @@ const productSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  user_id: {
+    type: String,
+    required: true
+  },
 }, {
   timestamps: true
 });
@@ -57,6 +61,16 @@ class Product {
   }
 
   static getAll() {
+    return new Promise((resolve, reject) => {
+      ProductModel.find({}).then((results) => {
+        resolve(results);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  }
+
+  static getAllById(id) {
     return new Promise((resolve, reject) => {
       ProductModel.find({}).then((results) => {
         resolve(results);

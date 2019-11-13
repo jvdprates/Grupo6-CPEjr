@@ -8,6 +8,7 @@ const request = require('request');
 
 var userSession = {
   userEmail: "",
+  userID: "",
   userAuthentication: false
 };
 
@@ -19,6 +20,7 @@ router.get('/', function(req, res, next) {
     console.log("Usuário já está logado");
     userSession.userAuthentication = false;
     userSession.userEmail = "";
+    userSession.userID = "";
     notifier.notify({
       title: 'Stocks',
       message: 'Usuário desconectado',
@@ -125,6 +127,7 @@ router.post('/pesquisa-search', function(req, res, next) {
 router.post('/pesquisa-add', function(req, res, next) {
   const newProduct = {
     // sigla: req.body.sigla,
+    user_id: userSession.userID,
     quantity: req.body.quantity,
     investedAmount: req.body.investedAmount,
     date: req.body.date,
@@ -147,7 +150,7 @@ router.post('/pesquisa-add', function(req, res, next) {
     }
   }).catch(err=>{
     console.log(err);
-    res.redirect('./');
+    res.redirect('./err');
   });
 });
 
@@ -177,6 +180,7 @@ router.post('/index', function(req, res, next) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
       userSession.userEmail = user.email;
       userSession.userAuthentication = true;
+      userSession.userID = fIREBASE.user.uid;
       res.redirect('/minha-carteira');
       notifier.notify({
   title: 'Stocks',
