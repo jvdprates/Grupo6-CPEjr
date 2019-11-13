@@ -6,17 +6,42 @@ const notifier = require('node-notifier');
 const path = require('path');
 const request = require('request');
 
+var userSession = {
+  userEmail: "",
+  userAuthentication: false
+};
+
 
 /* GET home page. */
 
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Stocks', layout: 'layout' });
+  if(userSession.userAuthentication == true){
+    console.log("Usuário já está logado");
+    userSession.userAuthentication = false;
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário desconectado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+  }
 });
 
 
 router.get('/adicionar', function(req, res, next) {
   res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  }
 });
 
 
@@ -26,16 +51,46 @@ router.get('/minha-carteira', function(req, res, next) {
   }).catch(err =>{
     res.redirect('./');
   });
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  }
 });
 
 
 router.get('/minha-rentabilidade', function(req, res, next) {
   res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  }
 });
 
 
 router.get('/pesquisa', function(req, res, next) {
   res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2'});
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  }
 });
 
 
@@ -63,6 +118,9 @@ router.post('/pesquisa-search', function(req, res, next) {
 });
 
 router.post('/pesquisa-add', function(req, res, next) {
+  if (userSession.userAuthentication == false){
+    res.redirect('./');
+  }
   const newProduct = {
     // sigla: req.body.sigla,
     quantity: req.body.quantity,
@@ -104,6 +162,8 @@ router.post('/index', function(req, res, next) {
   const user = req.body.user;
     console.log(user.email);
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
+      userSession.userEmail = user.email;
+      userSession.userAuthentication = true;
       res.redirect('/minha-carteira');
       notifier.notify({
   title: 'Stocks',
