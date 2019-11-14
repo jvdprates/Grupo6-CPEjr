@@ -66,6 +66,10 @@ app.engine('hbs', exphbs({
       return value.replace(".", ",");
      },
 
+     ifEquals(arg1, arg2, options){
+       return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+     },
+
    // Compare logic
    compare(lvalue, rvalue, options) {
      if (arguments.length < 3) {

@@ -6,36 +6,98 @@ const notifier = require('node-notifier');
 const path = require('path');
 const request = require('request');
 
+var userSession = {
+  userEmail: "",
+  userID: "",
+  userAuthentication: false
+};
 
 /* GET home page. */
 
-
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Stocks', layout: 'layout' });
+  if(userSession.userAuthentication == true){
+    console.log("Usuário já está logado");
+    userSession.userAuthentication = false;
+    userSession.userEmail = "";
+    userSession.userID = "";
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário desconectado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+  }
 });
 
 
 router.get('/adicionar', function(req, res, next) {
-  res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  } else {
+    res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
+  }
 });
 
 
 router.get('/minha-carteira', function(req, res, next) {
-   Product.getAll().then((products) =>{
-    res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
+   Product.getAllById(userSession.userID).then((products) =>{
+    if (userSession.userAuthentication == false){
+      console.log("Usuário não está autenticado");
+      notifier.notify({
+        title: 'Stocks',
+        message: 'Usuário não está logado',
+        sound: false,
+        icon: '/images/logo.png',
+      });
+      res.redirect('./');
+    }else{
+      res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
+    }
   }).catch(err =>{
+    console.log(err);
     res.redirect('./');
   });
+  
 });
 
 
 router.get('/minha-rentabilidade', function(req, res, next) {
-  res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  } else {
+    res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
+  }
 });
 
 
 router.get('/pesquisa', function(req, res, next) {
-  res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2'});
+  if (userSession.userAuthentication == false){
+    console.log("Usuário não está autenticado");
+    notifier.notify({
+      title: 'Stocks',
+      message: 'Usuário não está logado',
+      sound: false,
+      icon: '/images/logo.png',
+    });
+    res.redirect('./');
+  } else {
+    res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2'});
+  }
 });
 
 
@@ -65,6 +127,7 @@ router.post('/pesquisa-search', function(req, res, next) {
 router.post('/pesquisa-add', function(req, res, next) {
   const newProduct = {
     // sigla: req.body.sigla,
+    user_id: userSession.userID,
     quantity: req.body.quantity,
     investedAmount: req.body.investedAmount,
     date: req.body.date,
@@ -72,11 +135,22 @@ router.post('/pesquisa-add', function(req, res, next) {
     totalinvestedAmount: req.body.quantity*req.body.investedAmount
   }
   Product.createNew(newProduct).then((result)=>{
+    if (userSession.userAuthentication == false){
+      console.log("Usuário não está autenticado");
+      notifier.notify({
+        title: 'Stocks',
+        message: 'Usuário não está logado',
+        sound: false,
+        icon: '/images/logo.png',
+      });
+      res.redirect('./');
+    } else {
     console.log(result);
     res.redirect('/pesquisa');
+    }
   }).catch(err=>{
     console.log(err);
-    res.redirect('./');
+    res.redirect('./err');
   });
 });
 
@@ -106,6 +180,9 @@ router.post('/index', function(req, res, next) {
   const user = req.body.user;
     console.log(user.email);
     firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
+      userSession.userEmail = user.email;
+      userSession.userAuthentication = true;
+      userSession.userID = fIREBASE.user.uid;
       res.redirect('/minha-carteira');
       notifier.notify({
   title: 'Stocks',
@@ -121,12 +198,6 @@ router.post('/index', function(req, res, next) {
       }
       console.log(error);
       res.redirect('./');
-
-
-//       notifier.notify({
-//   title: 'Stocks',
-//   message: 'Email ou senha incorretos',
-// });
     });
 });
 
