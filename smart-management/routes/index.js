@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
       title: 'Stocks',
       message: 'Usuário desconectado',
       sound: false,
-      icon: '/images/logo.png',
+      icon: path.join(__dirname, 'logo.png'),
     });
   }
 });
@@ -38,7 +38,7 @@ router.get('/adicionar', function(req, res, next) {
       title: 'Stocks',
       message: 'Usuário não está logado',
       sound: false,
-      icon: '/images/logo.png',
+      icon: path.join(__dirname, 'logo.png'),
     });
     res.redirect('./');
   } else {
@@ -55,7 +55,7 @@ router.get('/minha-carteira', function(req, res, next) {
         title: 'Stocks',
         message: 'Usuário não está logado',
         sound: false,
-        icon: '/images/logo.png',
+        icon: path.join(__dirname, 'logo.png'),
       });
       res.redirect('./');
     }else{
@@ -76,7 +76,7 @@ router.get('/minha-rentabilidade', function(req, res, next) {
       title: 'Stocks',
       message: 'Usuário não está logado',
       sound: false,
-      icon: '/images/logo.png',
+      icon: path.join(__dirname, 'logo.png'),
     });
     res.redirect('./');
   } else {
@@ -92,7 +92,7 @@ router.get('/pesquisa', function(req, res, next) {
       title: 'Stocks',
       message: 'Usuário não está logado',
       sound: false,
-      icon: '/images/logo.png',
+      icon: path.join(__dirname, 'logo.png'),
     });
     res.redirect('./');
   } else {
@@ -141,7 +141,7 @@ router.post('/pesquisa-add', function(req, res, next) {
         title: 'Stocks',
         message: 'Usuário não está logado',
         sound: false,
-        icon: '/images/logo.png',
+        icon: path.join(__dirname, 'logo.png'),
       });
       res.redirect('./');
     } else {
@@ -212,25 +212,25 @@ router.post('/registrar', function(req, res, next) {
     console.log("Usuario registrado");
     res.redirect('./');
     notifier.notify({
-title: 'Stocks',
-message: 'Usuário registrado: ' +user.email,
-icon: path.join(__dirname, 'logo.png'),
+      title: 'Stocks',
+      message: 'Usuário registrado: ' +user.email,
+      icon: path.join(__dirname, 'logo.png'),
 });
   }).catch((error) => {
     console.log(error);
     res.redirect('/registrar');
     notifier.notify({
-title: 'Stocks',
-message: 'Insira um endereço de email válido',
-icon: path.join(__dirname, 'logo.png'),
+      title: 'Stocks',
+      message: 'Insira um endereço de email válido',
+      icon: path.join(__dirname, 'logo.png'),
 });
   });
   } else {
     console.log("Senha não bateu com a confirmacao de senha.");
     notifier.notify({
-  title: 'Stocks',
-  message: 'Senha não bateu com a confirmacao de senha',
-  icon: path.join(__dirname, 'logo.png'),
+      title: 'Stocks',
+      message: 'Senha não bateu com a confirmacao de senha',
+      icon: path.join(__dirname, 'logo.png'),
   });
     res.redirect('/registrar');
   }
