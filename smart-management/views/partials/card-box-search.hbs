@@ -1,5 +1,5 @@
 {{#each results}}
-  {{#ifEquals [4. region] "Brazil/Sao Paolo"}} 
+  {{#ifEquals [4. region] "Brazil/Sao Paolo"}}
     <div class="card text-white bg-dark search-card m-1">
       <div class="card-header">
         {{'1. symbol'}} - {{'2. name'}}
@@ -7,10 +7,10 @@
       <div class="card-body text-center">
         <p class="card-text">Informações</p>
         <a href="#" class="btn btn-primary">Detalhes</a>
-        <a class="btn btn-secondary p-0" title="Adicionar à carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 38px; width: 38px;">
+        <a class="btn btn-secondary p-0" title="Adicionar à carteira" data-toggle="modal" data-target="#Modal" data-code="{{'1. symbol'}}" data-whatever="NomeAção" style="height: 38px; width: 38px;">
           <i class="material-icons" style="line-height: unset;">note_add</i>
         </a>
       </div>
     </div>
-  {{/ifEquals}}  
+  {{/ifEquals}}
 {{/each}}

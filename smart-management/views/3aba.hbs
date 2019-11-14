@@ -17,9 +17,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- <input type="text" name="sigla" placeholder="Sigla da ação">
-          <br>
-          <br> -->
+          <input type="text" id="code" name="code" style="display: none">
           <label for="pwd">Quantidade de papéis</label>
           <br>
           <input type="number" class="form-control" name="quantity" placeholder="Quantidade de papéis">
@@ -71,6 +69,14 @@
       $('#card-group').append(repos);
     });
     console.log(keywords);
+  });
+
+  $('#Modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var recipient = button.data('code'); // Extract info from data-* attributes
+    // Update the modal's content. We'll use jQuery here
+    var modal = $(this);
+    modal.find('#code').val(recipient);
   });
 
   /*$('#search').on('input', (event) => {
