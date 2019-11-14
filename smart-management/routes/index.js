@@ -150,7 +150,7 @@ router.post('/pesquisa-add', function(req, res, next) {
     }
   }).catch(err=>{
     console.log(err);
-    res.redirect('./err');
+    res.redirect('./');
   });
 });
 
@@ -195,6 +195,9 @@ router.post('/index', function(req, res, next) {
         case 'auth/wrong-password':
           req.flash('danger', 'Senha incorreta');
           break;
+        case 'auth/user-not-found':
+        req.flash('danger', 'Email não registrado');
+        break;
       }
       console.log(error);
       res.redirect('./');
@@ -217,13 +220,22 @@ router.post('/registrar', function(req, res, next) {
       icon: path.join(__dirname, 'logo.png'),
 });
   }).catch((error) => {
-    console.log(error);
-    res.redirect('/registrar');
-    notifier.notify({
-      title: 'Stocks',
-      message: 'Insira um endereço de email válido',
-      icon: path.join(__dirname, 'logo.png'),
+    console.log(error.code);
+    if (error.code == "auth/email-already-in-use") {
+      notifier.notify({
+        title: 'Stocks',
+        message: 'Email já está em uso',
+        icon: path.join(__dirname, 'logo.png'),
+  });
+}
+else {
+  res.redirect('/registrar');
+  notifier.notify({
+    title: 'Stocks',
+    message: 'Insira um endereço de email válido',
+    icon: path.join(__dirname, 'logo.png'),
 });
+}
   });
   } else {
     console.log("Senha não bateu com a confirmacao de senha.");
@@ -233,7 +245,8 @@ router.post('/registrar', function(req, res, next) {
       icon: path.join(__dirname, 'logo.png'),
   });
     res.redirect('/registrar');
-  }
+
+}
 });
 
 
