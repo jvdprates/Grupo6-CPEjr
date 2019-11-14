@@ -9,7 +9,7 @@
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content bg-dark">
-      <form action="/pesquisa-add" method="post">
+      <form action="/pesquisa-add" id="form-add" method="post">
         <div class="modal-header" style="border-color: #454d55">
           <h5 class="modal-title" id="ModalLongTitle">Adicionar à carteira</h5>
           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="text-shadow: 0 0px 0;">
@@ -46,15 +46,17 @@
 <div id="card-group" class="card-group mt-2">
 </div>
 <div id="loading" style="display: none">
-  <div  class="d-flex justify-content-center mt-5">
+  <div class="d-flex justify-content-center mt-5">
     <div class="spinner-border text-secondary" role="status" style="width: 3rem; height: 3rem;" role="status">
       <span class="sr-only">Loading...</span>
     </div>
-</div>
+  </div>
 
 </div>
 
 <script type="text/javascript">
+
+  //Realizar pesquisa de ações
   $('#searchForm').submit((event) => {
 
     event.preventDefault(); // Stop the form from causing a page refresh.
@@ -71,12 +73,18 @@
     console.log(keywords);
   });
 
-  $('#Modal').on('show.bs.modal', function (event) {
+  //Enviar ao modal qual é a sigla da ação
+  $('#Modal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var recipient = button.data('code'); // Extract info from data-* attributes
     // Update the modal's content. We'll use jQuery here
     var modal = $(this);
     modal.find('#code').val(recipient);
+  });
+
+  //Limpar o que o usuário escreveu sempre que o modal fechar
+  $('#Modal').on('hidden.bs.modal', function(event) {
+    $(this).find('#form-add')[0].reset();
   });
 
   /*$('#search').on('input', (event) => {
