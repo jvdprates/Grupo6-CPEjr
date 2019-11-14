@@ -52,7 +52,7 @@
   <tbody>
     {{#each products}}
       <tr class="text-center">
-        <td class="align-middle"></td>
+        <td class="align-middle">{{code}}</td>
         <td class="align-middle">{{quantity}}</td>
         <td class="align-middle">R$ 00,00</td>
         <td class="align-middle">0,00 %</td>
@@ -61,7 +61,7 @@
         <td>R$ {{investedAmount}}</td>
         <td>{{date}}</td> -->
         <td>
-          <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{sigla}}" role="button" aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
+          <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{id9}}" role="button" aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
             <i class="material-icons" style="vertical-align: middle;">add</i>
           </a>
         </td>
@@ -72,7 +72,7 @@
       </tr>
       <tr>
         <td colspan="100" class="p-0 border-top-0" style="background-color: #33373c;">
-          <div class="collapse" id="collapse{{sigla}}">
+          <div class="collapse" id="collapse{{id}}">
             <div class="row px-2 pb-2 pt-1">
               <div class="col-sm-6">
                 <div class="row justify-content-center">

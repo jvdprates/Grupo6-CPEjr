@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  // abbreviaton:{
-  //   type: String,
-  //   required: true
-  // },
+  code: {
+    type: String,
+    required: true
+  },
   quantity: {
     type: Number,
     required: true
@@ -72,7 +72,9 @@ class Product {
 
   static getAllById(id) {
     return new Promise((resolve, reject) => {
-      ProductModel.find({"user_id":id}).then((results) => {
+      ProductModel.find({
+        "user_id": id
+      }).then((results) => {
         resolve(results);
       }).catch((err) => {
         reject(err);

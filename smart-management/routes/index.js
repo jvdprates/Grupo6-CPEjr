@@ -65,7 +65,7 @@ router.get('/minha-carteira', function(req, res, next) {
     console.log(err);
     res.redirect('./');
   });
-  
+
 });
 
 
@@ -126,7 +126,7 @@ router.post('/pesquisa-search', function(req, res, next) {
 
 router.post('/pesquisa-add', function(req, res, next) {
   const newProduct = {
-    // sigla: req.body.sigla,
+    code: req.body.code,
     user_id: userSession.userID,
     quantity: req.body.quantity,
     investedAmount: req.body.investedAmount,
