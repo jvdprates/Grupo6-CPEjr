@@ -48,7 +48,7 @@ router.get('/adicionar', function(req, res, next) {
 
 
 router.get('/minha-carteira', function(req, res, next) {
-   Product.getAll().then((products) =>{
+   Product.getAllById(userSession.userID).then((products) =>{
     if (userSession.userAuthentication == false){
       console.log("Usuário não está autenticado");
       notifier.notify({

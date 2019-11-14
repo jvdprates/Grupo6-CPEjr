@@ -72,7 +72,7 @@ class Product {
 
   static getAllById(id) {
     return new Promise((resolve, reject) => {
-      ProductModel.find({}).then((results) => {
+      ProductModel.find({"user_id":id}).then((results) => {
         resolve(results);
       }).catch((err) => {
         reject(err);
