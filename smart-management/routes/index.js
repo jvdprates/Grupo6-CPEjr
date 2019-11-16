@@ -59,6 +59,7 @@ router.get('/minha-carteira', function(req, res, next) {
       });
       res.redirect('./');
     }else{
+      //res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
       res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
     }
   }).catch(err =>{

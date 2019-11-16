@@ -1,3 +1,7 @@
+<!-- Graphic -->
+<!-- Include CHart Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -43,13 +47,11 @@
       <th scope="col">Redimento absoluto</th>
       <th scope="col">Rendimento percentual</th>
       <th scope="col"></th>
-      <!-- <th scope="col">Quantidade de pepéis</th>
-      <th scope="col">Valor do papel</th>
-      <th scope="col">Data da compra</th> -->
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
+
     {{#each products}}
       <tr class="text-center">
         <td class="align-middle">{{code}}</td>
@@ -95,7 +97,57 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="border border-primary h-100 text-center">
-                    Gráfico aqui :)
+                    <!-- Gráfico -->
+                    <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+                    <canvas class="line-chart"></canvas>
+                    <!-- Construção do gráfico -->
+                    <script>
+                      var ctx = document.getElementsByClassName("line-chart");
+                      //Cor padrão das fontes
+                      Chart.defaults.global.defaultFontColor = 'white';
+                      var chartGraph = new Chart(ctx, {
+                        //Tipo de gráfico: linha
+                        type: 'line',
+                        data: {
+                          //Eixo X
+                          labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+                          datasets: [{
+                            //Legenda / Nome do eixo Y
+                            label: "Rendimentos",
+                            //Dados eixo Y
+                            data: [10,20,26,30,29,60,21,15,28,09,43,12],
+                            //Espessura da linha
+                            borderWidth: 4,
+                            //Cor da linha (primária)
+                            borderColor: '#459124',
+                          }]
+                        },
+                        options: {
+                          //Animação: preenche uma barra de carregamento enquanto os dados são carregados
+                          //Como ainda são poucos dados, a animação não está aparecendo
+                          animation: {
+                            onProgress: function(animation) {
+                              progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
+                            }
+                          },
+                          title: {
+                            //Título do gráfico
+                            display: true,
+                            text: 'Rendimentos'
+                          },
+                          legend:{
+                            display: true,
+                            //Alinhamento da legenda: alinhamento não ta funcionando
+                            align: 'end',
+                            position:'top',
+                            labels:{
+                              //Largura da caixa de legenda
+                              boxWidth:10
+                            }
+                          }
+                        }
+                      });
+                    </script>
                   </div>
                 </div>
               </div>
