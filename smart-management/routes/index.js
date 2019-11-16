@@ -106,11 +106,6 @@ router.get('/esqueci-minha-senha', function(req, res, next) {
   res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout' });
 });
 
-router.get('/g', function(req, res, next) {
-  res.render('grafico');
-});
-
-
 
 router.get('/registrar', function(req, res, next) {
   res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout' });
