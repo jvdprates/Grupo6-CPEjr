@@ -1,3 +1,40 @@
+<html>
+<!-- Graphic -->
+
+<!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+<canvas class="line-chart"></canvas>
+
+<!-- Include CHart Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script>
+  var ctx = document.getElementsByClassName("line-chart");
+
+  // Type, Data and Options
+  Chart.defaults.global.defaultFontColor = 'black';
+  var chartGraph = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+      datasets: [{
+        label: "Rendimentos",
+        data: [10,20,26,30,29,60,21,15,28,09,43,12],
+        borderWidth: 4,
+        borderColor: 'primary',
+      }]
+    }
+    options: {
+        legend: {
+            labels: {
+                // This more specific font property overrides the global property
+                fontColor: 'red'
+            }
+          }
+        }
+  });
+</script>
+</html>
+
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -43,13 +80,11 @@
       <th scope="col">Redimento absoluto</th>
       <th scope="col">Rendimento percentual</th>
       <th scope="col"></th>
-      <!-- <th scope="col">Quantidade de pepéis</th>
-      <th scope="col">Valor do papel</th>
-      <th scope="col">Data da compra</th> -->
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
+
     {{#each products}}
       <tr class="text-center">
         <td class="align-middle">{{code}}</td>
@@ -96,6 +131,32 @@
                 <div class="col-sm-6">
                   <div class="border border-primary h-100 text-center">
                     Gráfico aqui :)
+                    <!-- Graphic -->
+
+                    <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+                    <!-- <canvas class = "line-chart"></canvas> -->
+
+                    <!-- Include CHart Js -->
+                    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
+
+                    <!-- <script>
+                      var ctx = document.getElementByClassName("line-chart"); -->
+
+                      <!-- // Type, Data and Options
+                      Chart.defaults.global.defaultFontColor = 'white';
+                      var chartGraph = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                          labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+                          datasets: [{
+                            label: "Rendimentos",
+                            data: [10,20,26,30,29,60,21,15,28,09,43,12],
+                            borderWidth: 4,
+                            borderColor: 'primary',
+                          }]
+                        }
+                      });
+                    </script> -->
                   </div>
                 </div>
               </div>

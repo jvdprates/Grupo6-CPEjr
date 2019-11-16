@@ -59,6 +59,7 @@ router.get('/minha-carteira', function(req, res, next) {
       });
       res.redirect('./');
     }else{
+      //res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
       res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
     }
   }).catch(err =>{
@@ -104,6 +105,11 @@ router.get('/pesquisa', function(req, res, next) {
 router.get('/esqueci-minha-senha', function(req, res, next) {
   res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout' });
 });
+
+router.get('/g', function(req, res, next) {
+  res.render('grafico');
+});
+
 
 
 router.get('/registrar', function(req, res, next) {
