@@ -97,15 +97,15 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="border border-primary h-100 text-center">
-                    <!-- Gráfico -->
+                    <!-- Gráfico de linha -->
                     <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
                     <canvas class="line-chart"></canvas>
                     <!-- Construção do gráfico -->
                     <script>
-                      var ctx = document.getElementsByClassName("line-chart");
+                      var ctxl = document.getElementsByClassName("line-chart");
                       //Cor padrão das fontes
                       Chart.defaults.global.defaultFontColor = 'white';
-                      var chartGraph = new Chart(ctx, {
+                      var chartGraph = new Chart(ctxl, {
                         //Tipo de gráfico: linha
                         type: 'line',
                         data: {
@@ -133,7 +133,8 @@
                           title: {
                             //Título do gráfico
                             display: true,
-                            text: 'Rendimentos'
+                            text: 'Rendimentos',
+                            padding: 15
                           },
                           legend:{
                             display: true,
@@ -158,3 +159,68 @@
     {{/each}}
   </tbody>
 </table>
+
+<!-- Tive que incluir de novo, não sei porque -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<div class="container">
+  <div class="col-sm-6 text-center">
+
+  <!-- Gráfico circular -->
+  <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+  <canvas class="doughnut-chart"></canvas>
+  <!-- Construção do gráfico -->
+  <script>
+    var ctxd = document.getElementsByClassName("doughnut-chart");
+    //Cor padrão das fontes
+    Chart.defaults.global.defaultFontColor = 'white';
+    //Cor padrão das fontes
+    //Chart.defaults.global.defaultFontColor = 'white';
+    var chartGraph = new Chart(ctxd, {
+      //Tipo de gráfico: linha
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          //Dados de cada ação
+          data: [10, 20, 30],
+          //Cores do fundo
+          backgroundColor:['red','yellow','blue'],
+          //Cor da borda (mesma cor do plano de fundo)
+          borderColor:'#0f100f',
+          //Espessura da borda
+          borderWidth: 3,
+          borderAlign:'inner'
+        }],
+        //Legenda / Nome das ações
+        labels: [
+          'Ação1',
+          'Ação2',
+          'Ação3'
+        ]
+      },
+      options: {
+        //Animação: o gráfico será animado com uma animação de rotação.
+        animation: {
+          animateRotate: true
+        },
+        title: {
+          //Título do gráfico
+          display: true,
+          text: 'Comparativo entre ações',
+          fontSize: 14,
+          padding: 20
+        },
+        legend:{
+          display: true,
+          //Alinhamento da legenda: alinhamento não ta funcionando
+          align: 'end',
+          position:'top',
+          labels:{
+            //Largura da caixa de legenda
+            boxWidth:10
+          }
+        }
+      }
+    });
+  </script>
+</div>
+</div>
