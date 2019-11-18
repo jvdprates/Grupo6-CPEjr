@@ -99,10 +99,10 @@
                   <div class="border border-primary h-100 text-center">
                     <!-- Gráfico de linha -->
                     <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
-                    <canvas class="line-chart"></canvas>
+                    <canvas class="line-chart{{id}}"></canvas>
                     <!-- Construção do gráfico -->
                     <script>
-                      var ctxl = document.getElementsByClassName("line-chart");
+                      var ctxl = document.getElementsByClassName("line-chart{{id}}");
                       //Cor padrão das fontes
                       Chart.defaults.global.defaultFontColor = 'white';
                       var chartGraph = new Chart(ctxl, {
