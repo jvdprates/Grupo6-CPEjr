@@ -125,6 +125,25 @@ router.post('/pesquisa-search', function (req, res, next) {
     });
 });
 
+router.get('/pesquisa-series-monthly/:code', function (req, res, next) {
+  const code = req.params.code;
+
+  request('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=' + code + '&apikey=5M98NU65NMZOASYR',
+    (error, response, body) => {
+      let results = JSON.parse(body)["Monthly Time Series"];
+      res.send(results);
+    });
+});
+
+router.get('/pesquisa-series-intraday-1min/:code', function (req, res, next) {
+  const code = req.params.code;
+  request('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + code + '&interval=1min&apikey=5M98NU65NMZOASYR',
+    (error, response, body) => {
+      let results = JSON.parse(body)["Time Series (1min)"];
+      res.send(results);
+    });
+});
+
 router.post('/pesquisa-add', function (req, res, next) {
   const newProduct = {
     code: req.body.code,

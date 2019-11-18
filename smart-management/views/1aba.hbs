@@ -69,7 +69,7 @@
         </td>
         <td>
           <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção" style="height: 27px; width: 27px;">
-          <i class="material-icons" style="vertical-align: middle;">close</i>
+            <i class="material-icons" style="vertical-align: middle;">close</i>
         </td>
       </tr>
       <tr>
@@ -90,19 +90,34 @@
                 <div class="row ml-3 mt-2">
                   <p>Rendimento da última semana: 0,00%</p>
                 </div>
-                  <div class="row ml-3">
-                    <p>Data da compra:&nbsp;</p>
-                    <p>{{formatTime date "DD/MM/YYYY"}}</p>
-                  </div>
+                <div class="row ml-3">
+                  <p>Data da compra:&nbsp;</p>
+                  <p>{{formatTime date "DD/MM/YYYY"}}</p>
                 </div>
-                <div class="col-sm-6">
-                  <div class="border border-primary h-100 text-center">
-                    <!-- Gráfico de linha -->
-                    <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
-                    <canvas class="line-chart"></canvas>
-                    <!-- Construção do gráfico -->
-                    <script>
-                      var ctxl = document.getElementsByClassName("line-chart");
+              </div>
+              <div class="col-sm-6">
+                <div class="h-100 text-center">
+                  <!-- Gráfico de linha -->
+                  <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+                  <canvas class="line-chart{{id}}"></canvas>
+                  <!-- Construção do gráfico -->
+                  <script>
+                    $.getJSON('pesquisa-series-intraday-1min/{{code}}', data => {
+
+                      var eixo_x = Object.keys(data);
+                      var eixo_y = [];
+
+                      Object.keys(data).forEach(key => {
+                        eixo_y.push(data[key]['4. close']); // key - value
+                      })
+
+                    //  eixo_x = eixo_x.slice(0, 12);
+                    //  eixo_y = eixo_y.slice(0, 12);
+
+                      eixo_x.reverse();
+                      eixo_y.reverse();
+
+                      var ctxl = document.getElementsByClassName("line-chart{{id}}");
                       //Cor padrão das fontes
                       Chart.defaults.global.defaultFontColor = 'white';
                       var chartGraph = new Chart(ctxl, {
@@ -110,16 +125,18 @@
                         type: 'line',
                         data: {
                           //Eixo X
-                          labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+                          labels: eixo_x,
                           datasets: [{
                             //Legenda / Nome do eixo Y
                             label: "Rendimentos",
                             //Dados eixo Y
-                            data: [10,20,26,30,29,60,21,15,28,09,43,12],
+                            data: eixo_y,
                             //Espessura da linha
                             borderWidth: 4,
                             //Cor da linha (primária)
                             borderColor: '#459124',
+
+                            pointRadius: 0.5,
                           }]
                         },
                         options: {
@@ -127,7 +144,7 @@
                           //Como ainda são poucos dados, a animação não está aparecendo
                           animation: {
                             onProgress: function(animation) {
-                              progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
+
                             }
                           },
                           title: {
@@ -136,23 +153,24 @@
                             text: 'Rendimentos',
                             padding: 15
                           },
-                          legend:{
+                          legend: {
                             display: true,
                             //Alinhamento da legenda: alinhamento não ta funcionando
                             align: 'end',
-                            position:'top',
-                            labels:{
+                            position: 'top',
+                            labels: {
                               //Largura da caixa de legenda
-                              boxWidth:10
+                              boxWidth: 10
                             }
                           }
                         }
                       });
-                    </script>
-                  </div>
+                    });
+                  </script>
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </td>
       </tr>
@@ -165,62 +183,62 @@
 <div class="container">
   <div class="col-sm-6 text-center">
 
-  <!-- Gráfico circular -->
-  <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
-  <canvas class="doughnut-chart"></canvas>
-  <!-- Construção do gráfico -->
-  <script>
-    var ctxd = document.getElementsByClassName("doughnut-chart");
-    //Cor padrão das fontes
-    Chart.defaults.global.defaultFontColor = 'white';
-    //Cor padrão das fontes
-    //Chart.defaults.global.defaultFontColor = 'white';
-    var chartGraph = new Chart(ctxd, {
-      //Tipo de gráfico: linha
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          //Dados de cada ação
-          data: [10, 20, 30],
-          //Cores do fundo
-          backgroundColor:['red','yellow','blue'],
-          //Cor da borda (mesma cor do plano de fundo)
-          borderColor:'#0f100f',
-          //Espessura da borda
-          borderWidth: 3,
-          borderAlign:'inner'
-        }],
-        //Legenda / Nome das ações
-        labels: [
-          'Ação1',
-          'Ação2',
-          'Ação3'
-        ]
-      },
-      options: {
-        //Animação: o gráfico será animado com uma animação de rotação.
-        animation: {
-          animateRotate: true
+    <!-- Gráfico circular -->
+    <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+    <canvas class="doughnut-chart"></canvas>
+    <!-- Construção do gráfico -->
+    <script>
+      var ctxd = document.getElementsByClassName("doughnut-chart");
+      //Cor padrão das fontes
+      Chart.defaults.global.defaultFontColor = 'white';
+      //Cor padrão das fontes
+      //Chart.defaults.global.defaultFontColor = 'white';
+      var chartGraph = new Chart(ctxd, {
+        //Tipo de gráfico: linha
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            //Dados de cada ação
+            data: [10, 20, 30],
+            //Cores do fundo
+            backgroundColor: ['red', 'yellow', 'blue'],
+            //Cor da borda (mesma cor do plano de fundo)
+            borderColor: '#0f100f',
+            //Espessura da borda
+            borderWidth: 3,
+            borderAlign: 'inner'
+          }],
+          //Legenda / Nome das ações
+          labels: [
+            'Ação1',
+            'Ação2',
+            'Ação3'
+          ]
         },
-        title: {
-          //Título do gráfico
-          display: true,
-          text: 'Comparativo entre ações',
-          fontSize: 14,
-          padding: 20
-        },
-        legend:{
-          display: true,
-          //Alinhamento da legenda: alinhamento não ta funcionando
-          align: 'end',
-          position:'top',
-          labels:{
-            //Largura da caixa de legenda
-            boxWidth:10
+        options: {
+          //Animação: o gráfico será animado com uma animação de rotação.
+          animation: {
+            animateRotate: true
+          },
+          title: {
+            //Título do gráfico
+            display: true,
+            text: 'Comparativo entre ações',
+            fontSize: 14,
+            padding: 20
+          },
+          legend: {
+            display: true,
+            //Alinhamento da legenda: alinhamento não ta funcionando
+            align: 'end',
+            position: 'top',
+            labels: {
+              //Largura da caixa de legenda
+              boxWidth: 10
+            }
           }
         }
-      }
-    });
-  </script>
-</div>
+      });
+    </script>
+  </div>
 </div>
