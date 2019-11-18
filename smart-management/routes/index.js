@@ -135,6 +135,7 @@ router.post('/pesquisa-add', function (req, res, next) {
     absolutRevenue: 100,
     totalinvestedAmount: req.body.quantity * req.body.investedAmount
   }
+  console.log(newProduct.date);
   Product.createNew(newProduct).then((result) => {
     if (userSession.userAuthentication == false) {
       console.log("Usuário não está autenticado");

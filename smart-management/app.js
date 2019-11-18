@@ -54,8 +54,8 @@ app.engine('hbs', exphbs({
    },
 
    formatTime(date, format){
-     var day = date.getDate();
-     var month = date.getMonth();
+     var day = date.getDate() + 1;
+     var month = date.getMonth() + 1;
      var year = date.getFullYear();
 
      return day + '/' + month + '/' + year;
