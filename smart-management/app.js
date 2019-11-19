@@ -14,7 +14,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
 
-
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://izabelabrant:cpejr123@cluster0-sy1bz.mongodb.net/test?retryWrites=true&w=majority', {
  useNewUrlParser: true,
