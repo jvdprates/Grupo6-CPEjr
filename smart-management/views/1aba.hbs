@@ -76,11 +76,21 @@
             <div class="col-sm-6">
               <div class="row justify-content-center">
                 <div class="col-sm-4 text-center">
-                  <p class="mb-1">Valor investido</p>
+                  <p class="mb-1">Valor total investido</p>
                   <p>R$ {{formatMoney totalinvestedAmount}}</p>
                 </div>
                 <div class="col-sm-4 text-center">
-                  <p class="mb-1">Valor atual</p>
+                  <p class="mb-1">Valor total atual</p>
+                  <p>R$ 00,00</p>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-sm-4 text-center">
+                  <p class="mb-1">Valor de compra</p>
+                  <p>R$ {{formatMoney investedAmount}}</p>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <p class="mb-1">Valor atual do papel</p>
                   <p>R$ 00,00</p>
                 </div>
               </div>
