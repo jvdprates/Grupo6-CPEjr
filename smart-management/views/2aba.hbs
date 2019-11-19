@@ -1,6 +1,4 @@
 <!-- Graphic -->
-<!-- Include CHart Js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <div class="container">
   <div class="row">
@@ -53,7 +51,7 @@
                 //Espessura da linha
                 borderWidth: 4,
                 //Cor da linha (primária)
-                borderColor: '#459124'
+                borderColor: 'orange'
               },
               {
                 //Legenda / Nome do eixo Y
@@ -69,20 +67,17 @@
                 //Legenda / Nome do eixo Y
                 label: "Minha carteira",
                 //Dados eixo Y
-                data: [4, 35, 18, 44, 10, 51, 32, 19, 27, 30, 22, 58],
+                data: [4, 35, 18, 44, 100, -51, 32, 19, 27, 30, 22, 58],
                 //Espessura da linha
                 borderWidth: 4,
                 //Cor da linha (primária)
-                borderColor: 'white'
+                borderColor: 'purple'
               }
             ]
           },
           options: {
-            //Animação: preenche uma barra de carregamento enquanto os dados são carregados
-            //Como ainda são poucos dados, a animação não está aparecendo
             animation: {
               onProgress: function (animation) {
-                progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
               },
               tooltips: {
                 mode: 'point'
