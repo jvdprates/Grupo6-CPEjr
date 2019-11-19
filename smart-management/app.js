@@ -57,6 +57,47 @@ app.engine('hbs', exphbs({
      var day = date.getDate() + 1;
      var month = date.getMonth() + 1;
      var year = date.getFullYear();
+     console.log(date.getDate());
+
+     if (day==32) {
+       day=01;
+       month=month+1;
+     }
+
+     if (day==31 && month==3) {
+       day=01;
+       month=month+1;
+     }
+
+     if (day==31 && month==4) {
+       day=01;
+       month=month+1;
+     }
+
+     if (day==31 && month==6) {
+       day=01;
+       month=month+1;
+     }
+
+     if (day==31 && month==9) {
+       day=01;
+       month=month+1;
+     }
+
+     if(day==31 && month==11){
+       day=01;
+       month=month+1;
+     }
+
+     if(day==29 && month==2 && year%4==0){
+       day=29;
+       month=2;
+     }
+
+     if(day==29 && month==2 && year%4!=0){
+       day=1;
+       month=3;
+     }
 
      return day + '/' + month + '/' + year;
     },
