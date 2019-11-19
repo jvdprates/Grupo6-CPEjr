@@ -16,15 +16,6 @@ const productSchema = new mongoose.Schema({
   totalinvestedAmount: {
     type: Number,
   },
-  currentAmount: {
-    type: Number,
-  },
-  absolutRevenue: {
-    type: Number,
-  },
-  percentRevenue: {
-    type: Number,
-  },
   date: {
     type: Date,
     required: true
@@ -79,6 +70,13 @@ class Product {
       }).catch((err) => {
         reject(err);
       });
+    });
+  }
+
+  static removeById(id) {
+    return new Promise((resolve, reject) => {
+      //console.log("{\"_id\":\"ObjectId(\""+id+"\")\"}");
+      ProductModel.remove({"_id": mongoose.ObjectId(id)})
     });
   }
 }

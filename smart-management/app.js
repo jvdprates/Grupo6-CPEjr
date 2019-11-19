@@ -57,7 +57,6 @@ app.engine('hbs', exphbs({
      var day = date.getDate() + 1;
      var month = date.getMonth() + 1;
      var year = date.getFullYear();
-     console.log(date.getDate());
 
      if (day==32) {
        day=01;

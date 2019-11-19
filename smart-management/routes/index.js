@@ -30,23 +30,6 @@ router.get('/', function (req, res, next) {
   }
 });
 
-
-router.get('/adicionar', function (req, res, next) {
-  if (userSession.userAuthentication == false) {
-    console.log("Usuário não está autenticado");
-    notifier.notify({
-      title: 'Stocks',
-      message: 'Usuário não está logado',
-      sound: false,
-      icon: path.join(__dirname, 'logo.png'),
-    });
-    res.redirect('./');
-  } else {
-    res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
-  }
-});
-
-
 router.get('/minha-carteira', function (req, res, next) {
   Product.getAllById(userSession.userID).then((products) => {
     if (userSession.userAuthentication == false) {
@@ -251,5 +234,11 @@ router.post('/registrar', function (req, res, next) {
   }
 });
 
+router.post('/deletar', function (req, res, next) {
+  const id = req.body._id;
+  console.log('-----'+id);
+  Product.removeById(id);
+  res.redirect('/minha-carteira');
+});
 
 module.exports = router;
