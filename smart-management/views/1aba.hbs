@@ -25,7 +25,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-12 text-center">
       <h1>Minha Carteira</h1>
@@ -33,142 +33,140 @@
   </div>
 </div>
 
+<div class="container-fluid">
+  <table class="table table-dark">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">Sigla</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Redimento absoluto</th>
+        <th scope="col">Rendimento percentual</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
 
-<table class="table table-dark">
-  <thead>
-    <tr class="text-center">
-      <th scope="col">Sigla</th>
-      <th scope="col">Quantidade</th>
-      <th scope="col">Redimento absoluto</th>
-      <th scope="col">Rendimento percentual</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-
-    {{#each products}}
-    <tr class="text-center">
-      <td class="align-middle">{{code}}</td>
-      <td class="align-middle">{{quantity}}</td>
-      <td class="align-middle">R$ 00,00</td>
-      <td class="align-middle">0,00 %</td>
-      <!-- <td>{{absolutRevenue}}</td>
-        <td>{{quantity}}</td>
-        <td>R$ {{investedAmount}}</td>
-        <td>{{date}}</td> -->
-      <td>
-        <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{id}}" role="button"
-          aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
-          <i class="material-icons" style="vertical-align: middle;">add</i>
-        </a>
-      </td>
-      <td>
-        <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal" data-whatever="NomeAção"
-          style="height: 27px; width: 27px;">
-          <i class="material-icons" style="vertical-align: middle;">close</i>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="100" class="p-0 border-top-0" style="background-color: #33373c;">
-        <div class="collapse" id="collapse{{id}}">
-          <div class="row px-2 pb-2 pt-1">
-            <div class="col-sm-6">
-              <div class="row justify-content-center">
-                <div class="col-sm-4 text-center">
-                  <p class="mb-1">Valor total investido</p>
-                  <p>R$ {{formatMoney totalinvestedAmount}}</p>
+      {{#each products}}
+      <tr class="text-center">
+        <td class="align-middle">{{code}}</td>
+        <td class="align-middle">{{quantity}}</td>
+        <td class="align-middle">R$ 00,00</td>
+        <td class="align-middle">0,00 %</td>
+        <td>
+          <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{id}}" role="button"
+            aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
+            <i class="material-icons" style="vertical-align: middle;">add</i>
+          </a>
+        </td>
+        <td>
+          <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal"
+            data-whatever="NomeAção" style="height: 27px; width: 27px;">
+            <i class="material-icons" style="vertical-align: middle;">close</i>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="100" class="p-0 border-top-0" style="background-color: #33373c;">
+          <div class="collapse" id="collapse{{id}}">
+            <div class="row px-2 pb-2 pt-1">
+              <div class="col-sm-6">
+                <div class="row justify-content-center">
+                  <div class="col-sm-4 text-center">
+                    <p class="mb-1">Valor total investido</p>
+                    <p>R$ {{formatMoney totalinvestedAmount}}</p>
+                  </div>
+                  <div class="col-sm-4 text-center">
+                    <p class="mb-1">Valor total atual</p>
+                    <p>R$ 00,00</p>
+                  </div>
                 </div>
-                <div class="col-sm-4 text-center">
-                  <p class="mb-1">Valor total atual</p>
-                  <p>R$ 00,00</p>
+                <div class="row justify-content-center">
+                  <div class="col-sm-4 text-center">
+                    <p class="mb-1">Valor de compra</p>
+                    <p>R$ {{formatMoney investedAmount}}</p>
+                  </div>
+                  <div class="col-sm-4 text-center">
+                    <p class="mb-1">Valor atual do papel</p>
+                    <p>R$ 00,00</p>
+                  </div>
                 </div>
-              </div>
-              <div class="row justify-content-center">
-                <div class="col-sm-4 text-center">
-                  <p class="mb-1">Valor de compra</p>
-                  <p>R$ {{formatMoney investedAmount}}</p>
+                <div class="row ml-3 mt-2">
+                  <p>Rendimento da última semana: 0,00%</p>
                 </div>
-                <div class="col-sm-4 text-center">
-                  <p class="mb-1">Valor atual do papel</p>
-                  <p>R$ 00,00</p>
+                <div class="row ml-3">
+                  <p>Data da compra:&nbsp;</p>
+                  <p>{{formatTime date "yyyy/mm/dd"}}</p>
                 </div>
               </div>
-              <div class="row ml-3 mt-2">
-                <p>Rendimento da última semana: 0,00%</p>
-              </div>
-              <div class="row ml-3">
-                <p>Data da compra:&nbsp;</p>
-                <p>{{formatTime date "yyyy/mm/dd"}}</p>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="border border-primary h-100 text-center">
-                <!-- Gráfico de linha -->
-                <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
-                <canvas class="line-chart{{id}}"></canvas>
-                <!-- Construção do gráfico -->
-                <script>
-                  var ctxl = document.getElementsByClassName("line-chart{{id}}");
-                  //Cor padrão das fontes
-                  Chart.defaults.global.defaultFontColor = 'white';
-                  var chartGraph = new Chart(ctxl, {
-                    //Tipo de gráfico: linha
-                    type: 'line',
-                    data: {
-                      //Eixo X
-                      labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-                      datasets: [{
-                        //Legenda / Nome do eixo Y
-                        label: "Rendimentos",
-                        //Dados eixo Y
-                        data: [10, 20, 26, 30, 29, 60, 21, 15, 28, 09, 43, 12],
-                        //Espessura da linha
-                        borderWidth: 4,
-                        //Cor da linha (primária)
-                        borderColor: '#459124',
-                      }]
-                    },
-                    options: {
-                      animation: {
-                        onProgress: function (animation) {
-                        }
+              <div class="col-sm-6">
+                <div class="border border-primary h-100 text-center">
+                  <!-- Gráfico de linha -->
+                  <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+                  <canvas class="line-chart{{id}}"></canvas>
+                  <!-- Construção do gráfico -->
+                  <script>
+                    var ctxl = document.getElementsByClassName("line-chart{{id}}");
+                    //Cor padrão das fontes
+                    Chart.defaults.global.defaultFontColor = 'white';
+                    var chartGraph = new Chart(ctxl, {
+                      //Tipo de gráfico: linha
+                      type: 'line',
+                      data: {
+                        //Eixo X
+                        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+                        datasets: [{
+                          //Legenda / Nome do eixo Y
+                          label: "Rendimentos",
+                          //Dados eixo Y
+                          data: [10, 20, 26, 30, 29, 60, 21, 15, 28, 09, 43, 12],
+                          //Espessura da linha
+                          borderWidth: 4,
+                          //Cor da linha (primária)
+                          borderColor: '#459124',
+                        }]
                       },
-                      title: {
-                        //Título do gráfico
-                        display: true,
-                        text: 'Rendimentos',
-                        padding: 15
-                      },
-                      legend: {
-                        display: true,
-                        //Alinhamento da legenda: alinhamento não ta funcionando
-                        align: 'end',
-                        position: 'top',
-                        labels: {
-                          //Largura da caixa de legenda
-                          boxWidth: 10
+                      options: {
+                        animation: {
+                          onProgress: function (animation) {
+                          }
+                        },
+                        title: {
+                          //Título do gráfico
+                          display: true,
+                          text: 'Rendimentos',
+                          padding: 15
+                        },
+                        legend: {
+                          display: true,
+                          //Alinhamento da legenda: alinhamento não ta funcionando
+                          align: 'end',
+                          position: 'top',
+                          labels: {
+                            //Largura da caixa de legenda
+                            boxWidth: 10
+                          }
                         }
                       }
-                    }
-                  });
-                </script>
+                    });
+                  </script>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        </div>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
+</div>
+</td>
+</tr>
+{{/each}}
+</tbody>
 </table>
+</div>
+
 
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6 text-center">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8 text-center">
       <!-- Gráfico circular -->
       <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
       <canvas class="doughnut-chart"></canvas>
@@ -180,14 +178,14 @@
         //Cor padrão das fontes
         //Chart.defaults.global.defaultFontColor = 'white';
         var chartGraph = new Chart(ctxd, {
-          //Tipo de gráfico: linha
+          //Tipo de gráfico: doughnut
           type: 'doughnut',
           data: {
             datasets: [{
               //Dados de cada ação
-              data: [10, 20, 30],
+              data: [10, 20, 30, 40, 10],
               //Cores do fundo
-              backgroundColor: ['red', 'yellow', 'blue'],
+              backgroundColor: ['#459124', '#4f585c', 'white', 'blue', 'violet'],
               //Cor da borda (mesma cor do plano de fundo)
               borderColor: '#0f100f',
               //Espessura da borda
@@ -195,11 +193,7 @@
               borderAlign: 'inner'
             }],
             //Legenda / Nome das ações
-            labels: [
-              'Ação1',
-              'Ação2',
-              'Ação3'
-            ]
+            labels: ['Ação1', 'Ação2', 'Ação3', 'Ação4', 'Outros']
           },
           options: {
             //Animação: o gráfico será animado com uma animação de rotação.
