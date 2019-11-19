@@ -125,6 +125,17 @@ router.post('/pesquisa-search', function (req, res, next) {
     });
 });
 
+router.get('/pesquisa-stock/:symbol', function (req, res, next) {
+  const symbol = req.params.symbol;
+  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + symbol + '&apikey=5M98NU65NMZOASYR',
+    (error, response, body) => {
+      let value = JSON.parse(body)['Global Quote'];
+      res.send(value);
+      console.log(value);
+    });
+});
+
+
 router.post('/pesquisa-add', function (req, res, next) {
   const newProduct = {
     code: req.body.code,
