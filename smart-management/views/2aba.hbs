@@ -1,3 +1,5 @@
+<!-- Graphic -->
+
 <div class="container">
   <div class="row">
     <div class="col-sm-12 text-center">
@@ -19,6 +21,87 @@
         <label class="btn btn-secondary">
           <input type="radio" name="options" id="option3" autocomplete="off"> 5 Anos
         </label>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8 text-center">
+        <!-- Gráfico de linha -->
+        <!-- start Canvas -> Desenhar elementos gráficos usado JS -->
+        <canvas class="line-chart"></canvas>
+        <!-- Construção do gráfico -->
+        <script>
+        var ctxl = document.getElementsByClassName("line-chart");
+        //Cor padrão das fontes
+        Chart.defaults.global.defaultFontColor = 'white';
+        var chartGraph = new Chart(ctxl, {
+          //Tipo de gráfico: linha
+          type: 'line',
+          data: {
+            //Eixo X
+            labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+            datasets: [
+              {
+                //Legenda / Nome do eixo Y
+                label: "CDI",
+                //Dados eixo Y
+                data: [10, 20, 26, 30, 29, 60, 21, 15, 28, 09, 43, 12],
+                //Espessura da linha
+                borderWidth: 4,
+                //Cor da linha (primária)
+                borderColor: 'orange'
+              },
+              {
+                //Legenda / Nome do eixo Y
+                label: "Ibovespa",
+                //Dados eixo Y
+                data: [40, 30, 10, 35, 54, 31, 41, 45, 24, 59, 34, 32],
+                //Espessura da linha
+                borderWidth: 4,
+                //Cor da linha (primária)
+                borderColor: 'blue'
+              },
+              {
+                //Legenda / Nome do eixo Y
+                label: "Minha carteira",
+                //Dados eixo Y
+                data: [4, 35, 18, 44, 100, -51, 32, 19, 27, 30, 22, 58],
+                //Espessura da linha
+                borderWidth: 4,
+                //Cor da linha (primária)
+                borderColor: 'purple'
+              }
+            ]
+          },
+          options: {
+            animation: {
+              onProgress: function (animation) {
+              },
+              tooltips: {
+                mode: 'point'
+              }
+            },
+            title: {
+              //Título do gráfico
+              display: true,
+              text: 'Minha carteira x CDI x Ibovespa',
+              padding: 15
+            },
+            legend: {
+              display: true,
+              //Alinhamento da legenda: alinhamento não ta funcionando
+              align: 'end',
+              position: 'top',
+              labels: {
+                //Largura da caixa de legenda
+                boxWidth: 10
+              }
+            }
+          }
+        });
+        </script>
       </div>
     </div>
   </div>

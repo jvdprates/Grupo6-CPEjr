@@ -1,7 +1,3 @@
-<!-- Graphic -->
-<!-- Include CHart Js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -83,11 +79,9 @@
                   <p class="mb-1">Valor investido</p>
                   <p>R$ {{formatMoney totalinvestedAmount}}</p>
                 </div>
-
                 <div class="col-sm-4 text-center">
                   <p class="mb-1">Valor atual</p>
                   <p>R$ 00,00</p>
-
                 </div>
               </div>
               <div class="row ml-3 mt-2">
@@ -126,11 +120,8 @@
                       }]
                     },
                     options: {
-                      //Animação: preenche uma barra de carregamento enquanto os dados são carregados
-                      //Como ainda são poucos dados, a animação não está aparecendo
                       animation: {
                         onProgress: function (animation) {
-                          progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
                         }
                       },
                       title: {
@@ -163,8 +154,7 @@
   </tbody>
 </table>
 
-<!-- Tive que incluir de novo, não sei porque -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3"></div>
