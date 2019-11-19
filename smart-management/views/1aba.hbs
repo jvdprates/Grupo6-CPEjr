@@ -129,6 +129,12 @@
                       animation: {
                         onProgress: function (animation) {
                           progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
+                        },
+                        events: ['click'],
+                        hover:{
+                          tooltips: {
+                            mode: 'point'
+                          }
                         }
                       },
                       title: {
