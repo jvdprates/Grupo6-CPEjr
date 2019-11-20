@@ -14,8 +14,11 @@ var userSession = {
 
 /* GET home page. */
 
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Stocks', layout: 'layout' });
+router.get('/', function(req, res, next) {
+  res.render('index', {
+    title: 'Stocks',
+    layout: 'layout'
+  });
   if (userSession.userAuthentication == true) {
     console.log("Usuário já está logado");
     userSession.userAuthentication = false;
@@ -31,7 +34,7 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.get('/adicionar', function (req, res, next) {
+router.get('/adicionar', function(req, res, next) {
   if (userSession.userAuthentication == false) {
     console.log("Usuário não está autenticado");
     notifier.notify({
@@ -42,12 +45,15 @@ router.get('/adicionar', function (req, res, next) {
     });
     res.redirect('./');
   } else {
-    res.render('product', { title: 'Adicionar à carteira', layout: 'layout' });
+    res.render('product', {
+      title: 'Adicionar à carteira',
+      layout: 'layout'
+    });
   }
 });
 
 
-router.get('/minha-carteira', function (req, res, next) {
+router.get('/minha-carteira', function(req, res, next) {
   Product.getAllById(userSession.userID).then((products) => {
     if (userSession.userAuthentication == false) {
       console.log("Usuário não está autenticado");
@@ -60,7 +66,11 @@ router.get('/minha-carteira', function (req, res, next) {
       res.redirect('./');
     } else {
       //res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products});
-      res.render('1aba', { title: 'Stocks - Minha Carteira', layout: 'layout2', products });
+      res.render('1aba', {
+        title: 'Stocks - Minha Carteira',
+        layout: 'layout2',
+        products
+      });
     }
   }).catch(err => {
     console.log(err);
@@ -70,7 +80,7 @@ router.get('/minha-carteira', function (req, res, next) {
 });
 
 
-router.get('/minha-rentabilidade', function (req, res, next) {
+router.get('/minha-rentabilidade', function(req, res, next) {
   if (userSession.userAuthentication == false) {
     console.log("Usuário não está autenticado");
     notifier.notify({
@@ -81,12 +91,15 @@ router.get('/minha-rentabilidade', function (req, res, next) {
     });
     res.redirect('./');
   } else {
-    res.render('2aba', { title: 'Stocks - Minha Rentabilidade', layout: 'layout2' });
+    res.render('2aba', {
+      title: 'Stocks - Minha Rentabilidade',
+      layout: 'layout2'
+    });
   }
 });
 
 
-router.get('/pesquisa', function (req, res, next) {
+router.get('/pesquisa', function(req, res, next) {
   if (userSession.userAuthentication == false) {
     console.log("Usuário não está autenticado");
     notifier.notify({
@@ -97,45 +110,73 @@ router.get('/pesquisa', function (req, res, next) {
     });
     res.redirect('./');
   } else {
-    res.render('3aba', { title: 'Stocks - Pesquisa de papéis', layout: 'layout2' });
+    res.render('3aba', {
+      title: 'Stocks - Pesquisa de papéis',
+      layout: 'layout2'
+    });
   }
 });
 
 
-router.get('/esqueci-minha-senha', function (req, res, next) {
-  res.render('esqueci-minha-senha', { title: 'Stocks - Esqueci minha senha', layout: 'layout' });
+router.get('/esqueci-minha-senha', function(req, res, next) {
+  res.render('esqueci-minha-senha', {
+    title: 'Stocks - Esqueci minha senha',
+    layout: 'layout'
+  });
 });
 
 
-router.get('/registrar', function (req, res, next) {
-  res.render('registrar', { title: 'Stocks - Registrar', layout: 'layout' });
+router.get('/registrar', function(req, res, next) {
+  res.render('registrar', {
+    title: 'Stocks - Registrar',
+    layout: 'layout'
+  });
 });
 
 
-router.get('/redefinir-senha', function (req, res, next) {
-  res.render('redefinir-senha', { title: 'Stocks - Redefinir senha' });
+router.get('/redefinir-senha', function(req, res, next) {
+  res.render('redefinir-senha', {
+    title: 'Stocks - Redefinir senha'
+  });
 });
 
-router.post('/pesquisa-search', function (req, res, next) {
+router.post('/pesquisa-search', function(req, res, next) {
   const keywords = req.body.search;
   request('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=' + keywords + '&apikey=5M98NU65NMZOASYR',
     (error, response, body) => {
       let results = JSON.parse(body).bestMatches;
-      res.render('partials/card-box-search', { layout: '', results });
+      res.render('partials/card-box-search', {
+        layout: '',
+        results
+      });
     });
 });
 
-router.get('/pesquisa-stock/:symbol', function (req, res, next) {
+router.get('/pesquisa-stock/:symbol', function(req, res, next) {
   const symbol = req.params.symbol;
+  getValues(symbol, function(value) {
+    res.send(value);
+  });
+});
+
+function getValues(symbol, callback) {
   request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + symbol + '&apikey=5M98NU65NMZOASYR',
     (error, response, body) => {
-      let value = JSON.parse(body)['Global Quote'];
-      res.send(value);
+      if (JSON.parse(body)['Note'] != null)
+      {
+        setTimeout(() => {getValues(symbol, callback)}, 60000);
+      }
+      else
+      {
+        let value = JSON.parse(body)['Global Quote'];
+        callback(value);
+      }
     });
-});
+}
 
 
-router.post('/pesquisa-add', function (req, res, next) {
+
+router.post('/pesquisa-add', function(req, res, next) {
   const newProduct = {
     code: req.body.code,
     user_id: userSession.userID,
@@ -166,7 +207,7 @@ router.post('/pesquisa-add', function (req, res, next) {
   });
 });
 
-router.post('/esqueci-minha-senha', function (req, res, next) {
+router.post('/esqueci-minha-senha', function(req, res, next) {
   const user = req.body.user;
   console.log(user.email);
   firebase.auth().sendPasswordResetEmail(user.email).then((fIREBASE) => {
@@ -188,7 +229,7 @@ router.post('/esqueci-minha-senha', function (req, res, next) {
   })
 });
 
-router.post('/index', function (req, res, next) {
+router.post('/index', function(req, res, next) {
   const user = req.body.user;
   console.log(user.email);
   firebase.auth().signInWithEmailAndPassword(user.email, user.password).then((fIREBASE) => {
@@ -217,7 +258,7 @@ router.post('/index', function (req, res, next) {
 });
 
 
-router.post('/registrar', function (req, res, next) {
+router.post('/registrar', function(req, res, next) {
   const user = req.body.user;
   console.log("----------------------------------------------------------------------------");
   console.log(user.email);
@@ -240,8 +281,7 @@ router.post('/registrar', function (req, res, next) {
           icon: path.join(__dirname, 'logo.png'),
         });
         res.redirect('/registrar')
-      }
-      else {
+      } else {
         res.redirect('/registrar');
         notifier.notify({
           title: 'Stocks',
