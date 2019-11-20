@@ -287,5 +287,28 @@ router.post('/deletar', function (req, res, next) {
   res.redirect('/minha-carteira');
 });
 
+router.get('/pesquisa-historico/:symbol', function(req, res, next) {
+  const symbol = req.params.symbol;
+  getHistory(symbol, function(value) {
+    res.send(value);
+  });
+});
+
+function getHistory(symbol, callback) {
+  request('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&apikey=Z0JH1MQZPCKQCEX1',
+    (error, response, body) => {
+      if (JSON.parse(body)['Note'] != null)
+      {
+        setTimeout(() => {getValues(symbol, callback)}, 60000);
+      }
+      else
+      {
+        let value = JSON.parse(body)['Weekly Time Series'];
+        callback(value);
+      }
+    });
+}
+
+
 
 module.exports = router;

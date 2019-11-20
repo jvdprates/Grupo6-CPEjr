@@ -116,6 +116,10 @@ app.engine('hbs', exphbs({
        return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
      },
 
+     removeEnd(value){
+       return (value.replace(".SAO", ""));
+     },
+
    // Compare logic
    compare(lvalue, rvalue, options) {
      if (arguments.length < 3) {
