@@ -236,9 +236,9 @@ router.post('/registrar', function (req, res, next) {
 
 router.post('/deletar', function (req, res, next) {
   const id = req.body._id;
-  console.log('-----'+id);
   Product.removeById(id);
   res.redirect('/minha-carteira');
 });
+
 
 module.exports = router;

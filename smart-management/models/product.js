@@ -75,8 +75,11 @@ class Product {
 
   static removeById(id) {
     return new Promise((resolve, reject) => {
-      //console.log("{\"_id\":\"ObjectId(\""+id+"\")\"}");
-      ProductModel.remove({"_id": mongoose.ObjectId(id)})
+      ProductModel.findOneAndRemove({_id:id}, function(err){
+        if(err){
+          console.log(err)
+        }
+      });
     });
   }
 }
