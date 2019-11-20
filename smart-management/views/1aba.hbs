@@ -121,14 +121,13 @@
                     total = total.replace(".", ",");
                     $("#valor-total-{{id}}").text(total);
 
-
                     var porc = (((data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }})* 100) /{{totalinvestedAmount}} ;
                     porc = parseFloat(porc);
                     porc = porc.toFixed(2);
                     porc = porc + "%";
                     porc = porc.replace(".", ",");
                     $("#rendimento-porcentagem-{{id}}").text(porc);
-                    
+
                     var rend = (data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }};
                     rend = parseFloat(rend);
                     rend = rend.toFixed(2);
