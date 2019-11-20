@@ -299,7 +299,7 @@ function getHistory(symbol, callback) {
     (error, response, body) => {
       if (JSON.parse(body)['Note'] != null)
       {
-        setTimeout(() => {getValues(symbol, callback)}, 60000);
+        setTimeout(() => {getHistory(symbol, callback)}, 60000);
       }
       else
       {
