@@ -1,8 +1,8 @@
 <!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content bg-dark">
-      <form action="/pesquisa" method="post">
+      <form action="/deletar" method="post">
         <div class="modal-header" style="border-color: #454d55">
           <h5 class="modal-title" id="ModalLongTitle">Remover da carteira</h5>
           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"
@@ -17,6 +17,7 @@
         </div>
         <div class="modal-footer" style="border-color: #454d55">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <input type="text" id="_id" name="_id" style="display: none">
           <button type="submit" class="btn btn-primary">Remover</button>
           </a>
         </div>
@@ -60,8 +61,7 @@
           </a>
         </td>
         <td>
-          <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal"
-            data-whatever="NomeAção" style="height: 27px; width: 27px;">
+          <a class="btn p-0" title="Remover da carteira" data-toggle="modal" data-target="#Modal2" data-id={{id}} style="height: 27px; width: 27px;">
             <i class="material-icons" style="vertical-align: middle;">close</i>
         </td>
       </tr>
@@ -264,6 +264,18 @@
           }
         });
       </script>
+
+      <script type="text/javascript">
+        //Enviar ao modal qual é a sigla da ação
+        $('#Modal2').on('show.bs.modal', function(event) {
+          var button = $(event.relatedTarget); // Button that triggered the modal
+          var recipient = button.data('id'); // Extract info from data-* attributes
+          console.log(recipient);// Update the modal's content. We'll use jQuery here
+          var modal = $(this);
+          modal.find('#_id').val(recipient);
+        });
+      </script>
+      
     </div>
   </div>
 </div>
