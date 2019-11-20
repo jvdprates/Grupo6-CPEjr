@@ -81,6 +81,16 @@ class Product {
       });
     });
   }
+
+  static removeById(id) {
+    return new Promise((resolve, reject) => {
+      ProductModel.findOneAndRemove({_id:id}, function(err){
+        if(err){
+          console.log(err)
+        }
+      });
+    });
+  }
 }
 
 module.exports = Product;
