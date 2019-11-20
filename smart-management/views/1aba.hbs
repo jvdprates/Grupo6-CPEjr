@@ -46,7 +46,6 @@
       </tr>
     </thead>
     <tbody>
-
       {{#each products}}
       <tr class="text-center">
         <td class="align-middle">{{code}}</td>
@@ -90,17 +89,15 @@
                     <p id="valor-atual-{{id}}"> Valor </p>
                   </div>
                 </div>
-                <div class="row ml-3 mt-2">
-                  <p>Rendimento da última semana: 0,00%</p>
-                </div>
-                <div class="row ml-3">
-                  <p>Data da compra:&nbsp;</p>
-                  <p>{{formatTime date "yyyy/mm/dd"}}</p>
+                <div class="row justify-content-center">
+                  <div class="col-sm-8 text-center">
+                    <p class="mb-1">Data da compra: {{formatTime date "yyyy/mm/dd"}}</p>
+                  </div>
                 </div>
 
                 <script type="text/javascript">
                   $.getJSON('/pesquisa-stock/{{code}}', data => {
-                  console.log(data['05. price'] * {{ quantity }});
+                    console.log(data['05. price'] * {{ quantity }});
                   var atual = data['05. price'];
                   atual = parseFloat(atual);
                   atual = atual.toFixed(2);
@@ -148,7 +145,7 @@
                         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
                         datasets: [{
                           //Legenda / Nome do eixo Y
-                          label: "Rendimentos",
+                          label: "Valor da Ação",
                           //Dados eixo Y
                           data: [10, 20, 26, 30, 29, 60, 21, 15, 28, 09, 43, 12],
                           //Espessura da linha
@@ -165,18 +162,19 @@
                         title: {
                           //Título do gráfico
                           display: true,
-                          text: 'Rendimentos',
+                          text: 'Valor da ação',
+                          align: 'start',
                           padding: 15
                         },
                         legend: {
-                          display: true,
+                          display: false,
                           //Alinhamento da legenda: alinhamento não ta funcionando
-                          align: 'end',
-                          position: 'top',
-                          labels: {
+                          //align: 'end',
+                          //osition: 'top',
+                          //labels: {
                             //Largura da caixa de legenda
-                            boxWidth: 10
-                          }
+                           //boxWidth: 10
+                          //}
                         }
                       }
                     });
@@ -185,12 +183,11 @@
               </div>
             </div>
           </div>
-</div>
-</td>
-</tr>
-{{/each}}
-</tbody>
-</table>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
 
 
@@ -213,56 +210,57 @@
         var nome = "Nome";
         var numero;
         {{#each products}}
-          numero = parseFloat({{totalinvestedAmount}});
-          numero = numero.toFixed(2);
-          listaValores.push(numero);
-          listaNomes.push(nome);
+        numero = parseFloat({{ totalinvestedAmount }});
+        nome = "{{code}}";
+        numero = numero.toFixed(2);
+        listaValores.push(numero);
+        listaNomes.push(nome);
         {{/each}}
 
-        //Cor padrão das fontes
-        //Chart.defaults.global.defaultFontColor = 'white';
-        var chartGraph = new Chart(ctxd, {
-          //Tipo de gráfico: doughnut
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              //Dados de cada ação
-              data: listaValores,
-              //Cores do fundo
-              backgroundColor: ['#459124', '#4f585c', 'white', 'blue', 'violet'],
-              //Cor da borda (mesma cor do plano de fundo)
-              borderColor: '#0f100f',
-              //Espessura da borda
-              borderWidth: 3,
-              borderAlign: 'inner'
-            }],
-            //Legenda / Nome das ações
-            labels: listaNomes,
-          },
-          options: {
-            //Animação: o gráfico será animado com uma animação de rotação.
-            animation: {
-              animateRotate: true
-            },
-            title: {
-              //Título do gráfico
-              display: true,
-              text: 'Comparativo entre ações',
-              fontSize: 14,
-              padding: 20
-            },
-            legend: {
-              display: true,
-              //Alinhamento da legenda: alinhamento não ta funcionando
-              align: 'end',
-              position: 'top',
-              labels: {
-                //Largura da caixa de legenda
-                boxWidth: 10
+            //Cor padrão das fontes
+            //Chart.defaults.global.defaultFontColor = 'white';
+            var chartGraph = new Chart(ctxd, {
+              //Tipo de gráfico: doughnut
+              type: 'doughnut',
+              data: {
+                datasets: [{
+                  //Dados de cada ação
+                  data: listaValores,
+                  //Cores do fundo
+                  backgroundColor: ['#459124', '#4f585c', 'white', 'blue', 'violet'],
+                  //Cor da borda (mesma cor do plano de fundo)
+                  borderColor: '#0f100f',
+                  //Espessura da borda
+                  borderWidth: 3,
+                  borderAlign: 'inner'
+                }],
+                //Legenda / Nome das ações
+                labels: listaNomes,
+              },
+              options: {
+                //Animação: o gráfico será animado com uma animação de rotação.
+                animation: {
+                  animateRotate: true
+                },
+                title: {
+                  //Título do gráfico
+                  display: true,
+                  text: 'Distribuição de Investimentos',
+                  fontSize: 14,
+                  padding: 20
+                },
+                legend: {
+                  display: true,
+                  //Alinhamento da legenda: alinhamento não ta funcionando
+                  align: 'end',
+                  position: 'top',
+                  labels: {
+                    //Largura da caixa de legenda
+                    boxWidth: 10
+                  }
+                }
               }
-            }
-          }
-        });
+            });
       </script>
     </div>
   </div>
