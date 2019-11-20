@@ -51,8 +51,30 @@
       <tr class="text-center">
         <td class="align-middle">{{code}}</td>
         <td class="align-middle">{{quantity}}</td>
-        <td class="align-middle">R$ 00,00</td>
-        <td class="align-middle">0,00 %</td>
+        <td class="align-middle" id="rendimento-total-{{id}}">Rendimento</td>
+        <script type="text/javascript">
+          $.getJSON('/pesquisa-stock/{{code}}', data => {
+          var rend = (data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }};
+          rend = parseFloat(rend);
+          rend = rend.toFixed(2);
+          rend = "R$" + rend;
+          rend = rend.replace(".", ",");
+          $("#rendimento-total-{{id}}").text(rend);
+          });
+        </script>
+
+        <td class="align-middle" id="rendimento-porcentagem-{{id}}">Porcentagem</td>
+        <script type="text/javascript">
+          $.getJSON('/pesquisa-stock/{{code}}', data => {
+          var porc = (((data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }})* 100) /{{totalinvestedAmount}} ;
+          porc = parseFloat(porc);
+          porc = porc.toFixed(2);
+          porc = porc + "%";
+          porc = porc.replace(".", ",");
+          $("#rendimento-porcentagem-{{id}}").text(porc);
+          });
+        </script>
+
         <td>
           <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{id}}" role="button"
             aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
@@ -78,18 +100,17 @@
                   <div class="col-sm-4 text-center">
 
                     <p class="mb-1">Valor total atual</p>
-                <p id="valor-total-{{id}}"> total </p>
+                    <p id="valor-total-{{id}}"> Total </p>
 
-                  <script type="text/javascript">
-                     $.getJSON('/pesquisa-stock/{{code}}', data => {
-                      console.log(data['05. price']*{{quantity}});
-                      var total = data['05. price']*{{quantity}};
+                    <script type="text/javascript">
+                      $.getJSON('/pesquisa-stock/{{code}}', data => {
+                      var total = data['05. price'] * {{ quantity }};
                       total = total.toFixed(2);
                       total = "R$" + total;
-                      total = total.replace(".",",");
+                      total = total.replace(".", ",");
                       $("#valor-total-{{id}}").text(total);
                      });
-                  </script>
+                    </script>
 
                   </div>
                 </div>
@@ -103,18 +124,18 @@
                   <div class="col-sm-4 text-center">
 
                     <p class="mb-1">Valor atual do papel</p>
-                    <p id="valor-atual-{{id}}"> data['05. price'] </p>
+                    <p id="valor-atual-{{id}}"> Valor </p>
 
                     <script type="text/javascript">
-                       $.getJSON('/pesquisa-stock/{{code}}', data => {
-                        console.log(data['05. price']*{{quantity}});
-                        var text = data['05. price'];
-                        text = parseFloat(text);
-                        text = text.toFixed(2);
-                        text = "R$" + text;
-                        text = text.replace(".",",");
-                        $("#valor-atual-{{id}}").text(text);
-                       });
+                      $.getJSON('/pesquisa-stock/{{code}}', data => {
+                      console.log(data['05. price'] * {{ quantity }});
+                      var atual = data['05. price'];
+                      atual = parseFloat(atual);
+                      atual = atual.toFixed(2);
+                      atual = "R$" + atual;
+                      atual = atual.replace(".", ",");
+                      $("#valor-atual-{{id}}").text(atual);
+                      });
                     </script>
 
                   </div>
@@ -204,6 +225,7 @@
         var ctxd = document.getElementsByClassName("doughnut-chart");
         //Cor padrão das fontes
         Chart.defaults.global.defaultFontColor = 'white';
+
         //Cor padrão das fontes
         //Chart.defaults.global.defaultFontColor = 'white';
         var chartGraph = new Chart(ctxd, {
