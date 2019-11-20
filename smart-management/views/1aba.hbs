@@ -49,10 +49,10 @@
     <tbody>
       {{#each products}}
       <tr class="text-center">
-        <td class="align-middle">{{code}}</td>
+        <td class="align-middle">{{removeEnd code}}</td>
         <td class="align-middle">{{quantity}}</td>
-        <td class="align-middle" id="rendimento-total-{{id}}">Rendimento</td>
-        <td class="align-middle" id="rendimento-porcentagem-{{id}}">Porcentagem</td>
+        <td class="align-middle" id="rendimento-total-{{id}}">Carregando...</td>
+        <td class="align-middle" id="rendimento-porcentagem-{{id}}">Carregando...</td>
         <td>
           <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{id}}" role="button"
             aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
@@ -76,7 +76,7 @@
                   </div>
                   <div class="col-sm-4 text-center">
                     <p class="mb-1">Valor total atual</p>
-                    <p id="valor-total-{{id}}"> Total </p>
+                    <p id="valor-total-{{id}}"> Carregando... </p>
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -86,7 +86,7 @@
                   </div>
                   <div class="col-sm-4 text-center">
                     <p class="mb-1">Valor atual do papel</p>
-                    <p id="valor-atual-{{id}}"> Valor </p>
+                    <p id="valor-atual-{{id}}"> Carregando... </p>
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -134,49 +134,65 @@
                   <canvas class="line-chart{{id}}"></canvas>
                   <!-- Construção do gráfico -->
                   <script>
-                    var ctxl = document.getElementsByClassName("line-chart{{id}}");
-                    //Cor padrão das fontes
-                    Chart.defaults.global.defaultFontColor = 'white';
-                    var chartGraph = new Chart(ctxl, {
-                      //Tipo de gráfico: linha
-                      type: 'line',
-                      data: {
-                        //Eixo X
-                        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-                        datasets: [{
-                          //Legenda / Nome do eixo Y
-                          label: "Valor da Ação",
-                          //Dados eixo Y
-                          data: [10, 20, 26, 30, 29, 60, 21, 15, 28, 09, 43, 12],
-                          //Espessura da linha
-                          borderWidth: 4,
-                          //Cor da linha (primária)
-                          borderColor: '#459124',
-                        }]
-                      },
-                      options: {
-                        animation: {
-                          onProgress: function (animation) {
+                   
+                    //Função de busca no API
+                    $.getJSON('/pesquisa-historico/{{code}}', data => {
+                      var todasDatas = [];
+                      var close = [];
+                      todasDatas = Object.keys(data);
+                      todasDatas = todasDatas.slice(0,52);
+                      Object.keys(data).forEach(key => { 
+                        close.push(data[key]['4. close']); // key - value 
+                      });
+                      close = close.slice(0,52);
+                      close.reverse();
+                      todasDatas.reverse();
+
+                      var ctxl = document.getElementsByClassName("line-chart{{id}}");
+                      //Cor padrão das fontes
+                      Chart.defaults.global.defaultFontColor = 'white';
+
+                      var chartGraph = new Chart(ctxl, {
+                        //Tipo de gráfico: linha
+                        type: 'line',
+                        data: {
+                          //Eixo X
+                          labels: todasDatas,
+                          datasets: [{
+                            //Legenda / Nome do eixo Y
+                            label: "Valor da Ação",
+                            //Dados eixo Y
+                            data: close,
+                            //Espessura da linha
+                            borderWidth: 4,
+                            //Cor da linha (primária)
+                            borderColor: '#459124',
+                          }]
+                        },
+                        options: {
+                          animation: {
+                            onProgress: function (animation) {
+                            }
+                          },
+                          title: {
+                            //Título do gráfico
+                            display: true,
+                            text: 'Valor da ação',
+                            align: 'start',
+                            padding: 15
+                          },
+                          legend: {
+                            display: false,
+                            //Alinhamento da legenda: alinhamento não ta funcionando
+                            //align: 'end',
+                            //osition: 'top',
+                            //labels: {
+                              //Largura da caixa de legenda
+                            //boxWidth: 10
+                            //}
                           }
-                        },
-                        title: {
-                          //Título do gráfico
-                          display: true,
-                          text: 'Valor da ação',
-                          align: 'start',
-                          padding: 15
-                        },
-                        legend: {
-                          display: false,
-                          //Alinhamento da legenda: alinhamento não ta funcionando
-                          //align: 'end',
-                          //osition: 'top',
-                          //labels: {
-                            //Largura da caixa de legenda
-                           //boxWidth: 10
-                          //}
                         }
-                      }
+                      });
                     });
                   </script>
                 </div>
@@ -211,7 +227,7 @@
         var numero;
         {{#each products}}
         numero = parseFloat({{ totalinvestedAmount }});
-        nome = "{{code}}";
+        nome = "{{removeEnd code}}";
         numero = numero.toFixed(2);
         listaValores.push(numero);
         listaNomes.push(nome);
