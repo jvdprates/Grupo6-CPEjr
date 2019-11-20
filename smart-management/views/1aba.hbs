@@ -87,7 +87,20 @@
                   </div>
                   <div class="col-sm-4 text-center">
                     <p class="mb-1">Valor atual do papel</p>
-                    <p>R$ 00,00</p>
+                    <p id="valor-atual-{{id}}"> data['05. price'] </p>
+                    <script type="text/javascript">
+                       $.getJSON('/pesquisa-stock/{{code}}', data => {
+                        console.log(data['05. price']);
+                        var text = data['05. price'];
+                        text = parseFloat(text);
+                        text = text.toFixed(2);
+                        text = "R$" + text;
+                        text = text.replace(".",",");
+
+                        $("#valor-atual-{{id}}").text(text);
+                       });
+                    </script>
+
                   </div>
                 </div>
                 <div class="row ml-3 mt-2">
