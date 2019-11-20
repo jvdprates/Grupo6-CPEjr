@@ -131,7 +131,6 @@ router.get('/pesquisa-stock/:symbol', function (req, res, next) {
     (error, response, body) => {
       let value = JSON.parse(body)['Global Quote'];
       res.send(value);
-      console.log(value);
     });
 });
 

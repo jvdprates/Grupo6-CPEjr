@@ -99,6 +99,11 @@ app.engine('hbs', exphbs({
        month=3;
      }
 
+     if(day==30 && month==2 && year%4==0){
+       day=1;
+       month=month+1;
+     }
+
      return day + '/' + month + '/' + year;
     },
 
