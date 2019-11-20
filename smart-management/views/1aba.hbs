@@ -52,29 +52,7 @@
         <td class="align-middle">{{code}}</td>
         <td class="align-middle">{{quantity}}</td>
         <td class="align-middle" id="rendimento-total-{{id}}">Rendimento</td>
-        <script type="text/javascript">
-          $.getJSON('/pesquisa-stock/{{code}}', data => {
-          var rend = (data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }};
-          rend = parseFloat(rend);
-          rend = rend.toFixed(2);
-          rend = "R$" + rend;
-          rend = rend.replace(".", ",");
-          $("#rendimento-total-{{id}}").text(rend);
-          });
-        </script>
-
         <td class="align-middle" id="rendimento-porcentagem-{{id}}">Porcentagem</td>
-        <script type="text/javascript">
-          $.getJSON('/pesquisa-stock/{{code}}', data => {
-          var porc = (((data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }})* 100) /{{totalinvestedAmount}} ;
-          porc = parseFloat(porc);
-          porc = porc.toFixed(2);
-          porc = porc + "%";
-          porc = porc.replace(".", ",");
-          $("#rendimento-porcentagem-{{id}}").text(porc);
-          });
-        </script>
-
         <td>
           <a class="btn btn-primary p-0" title="Detalhes" data-toggle="collapse" href="#collapse{{id}}" role="button"
             aria-expanded="false" aria-controls="collapseExample" style="height: 27px; width: 27px;">
@@ -98,46 +76,18 @@
                     <p>R$ {{formatMoney totalinvestedAmount}}</p>
                   </div>
                   <div class="col-sm-4 text-center">
-
                     <p class="mb-1">Valor total atual</p>
                     <p id="valor-total-{{id}}"> Total </p>
-
-                    <script type="text/javascript">
-                      $.getJSON('/pesquisa-stock/{{code}}', data => {
-                      var total = data['05. price'] * {{ quantity }};
-                      total = total.toFixed(2);
-                      total = "R$" + total;
-                      total = total.replace(".", ",");
-                      $("#valor-total-{{id}}").text(total);
-                     });
-                    </script>
-
                   </div>
                 </div>
                 <div class="row justify-content-center">
                   <div class="col-sm-4 text-center">
-
                     <p class="mb-1">Valor de compra</p>
                     <p>R$ {{formatMoney investedAmount}}</p>
                   </div>
-
                   <div class="col-sm-4 text-center">
-
                     <p class="mb-1">Valor atual do papel</p>
                     <p id="valor-atual-{{id}}"> Valor </p>
-
-                    <script type="text/javascript">
-                      $.getJSON('/pesquisa-stock/{{code}}', data => {
-                      console.log(data['05. price'] * {{ quantity }});
-                      var atual = data['05. price'];
-                      atual = parseFloat(atual);
-                      atual = atual.toFixed(2);
-                      atual = "R$" + atual;
-                      atual = atual.replace(".", ",");
-                      $("#valor-atual-{{id}}").text(atual);
-                      });
-                    </script>
-
                   </div>
                 </div>
                 <div class="row ml-3 mt-2">
@@ -147,6 +97,38 @@
                   <p>Data da compra:&nbsp;</p>
                   <p>{{formatTime date "yyyy/mm/dd"}}</p>
                 </div>
+
+                <script type="text/javascript">
+                  $.getJSON('/pesquisa-stock/{{code}}', data => {
+                  console.log(data['05. price'] * {{ quantity }});
+                  var atual = data['05. price'];
+                  atual = parseFloat(atual);
+                  atual = atual.toFixed(2);
+                  atual = "R$" + atual;
+                  atual = atual.replace(".", ",");
+                  $("#valor-atual-{{id}}").text(atual);
+
+                  var total = data['05. price'] * {{ quantity }};
+                  total = total.toFixed(2);
+                  total = "R$" + total;
+                  total = total.replace(".", ",");
+                  $("#valor-total-{{id}}").text(total);
+
+                  var porc = (((data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }})* 100) /{{totalinvestedAmount}} ;
+                  porc = parseFloat(porc);
+                  porc = porc.toFixed(2);
+                  porc = porc + "%";
+                  porc = porc.replace(".", ",");
+                  $("#rendimento-porcentagem-{{id}}").text(porc);
+
+                  var rend = (data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }};
+                  rend = parseFloat(rend);
+                  rend = rend.toFixed(2);
+                  rend = "R$" + rend;
+                  rend = rend.replace(".", ",");
+                  $("#rendimento-total-{{id}}").text(rend);
+                  });
+                </script>
               </div>
               <div class="col-sm-6">
                 <div class="border border-primary h-100 text-center">
