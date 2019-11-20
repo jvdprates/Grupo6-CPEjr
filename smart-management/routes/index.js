@@ -261,7 +261,15 @@ router.post('/registrar', function(req, res, next) {
           icon: path.join(__dirname, 'logo.png'),
         });
         res.redirect('/registrar')
-      } else {
+      } else if (error.code == "auth/weak-password") {
+          notifier.notify({
+          title: 'Stocks',
+          message: 'Senha muito fraca',
+          icon: path.join(__dirname, 'logo.png'),
+      });
+      res.redirect('/registrar')
+      }
+      else {
         res.redirect('/registrar');
         notifier.notify({
           title: 'Stocks',
