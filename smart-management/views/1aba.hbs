@@ -226,6 +226,29 @@
         //Cor padrão das fontes
         Chart.defaults.global.defaultFontColor = 'white';
 
+        var listaValores = [];
+        var listaNomes = [];
+        var nome = "Nome";
+        var numero;
+        var i = 0;
+        {{#each products}}
+        if (i < 5){
+          numero = parseFloat({{totalinvestedAmount}});
+          numero = numero.toFixed(2);
+          listaValores.push(numero);
+          listaNomes.push(nome);
+        } else if(i == 5) {
+          numero = parseFloat({{totalinvestedAmount}});
+          listaValores.push(numero);
+          nome = "Outros";
+          listaNomes.push(nome);
+        } else {
+          listaValores.pop(numero);
+          numero = numero + parseFloat({{totalinvestedAmount}});
+          listaValores.push(numero)
+        }
+        {{/each}}
+
         //Cor padrão das fontes
         //Chart.defaults.global.defaultFontColor = 'white';
         var chartGraph = new Chart(ctxd, {
@@ -234,7 +257,7 @@
           data: {
             datasets: [{
               //Dados de cada ação
-              data: [10, 20, 30, 40, 10],
+              data: listaValores,
               //Cores do fundo
               backgroundColor: ['#459124', '#4f585c', 'white', 'blue', 'violet'],
               //Cor da borda (mesma cor do plano de fundo)
@@ -244,7 +267,7 @@
               borderAlign: 'inner'
             }],
             //Legenda / Nome das ações
-            labels: ['Ação1', 'Ação2', 'Ação3', 'Ação4', 'Outros']
+            labels: listaNomes,
           },
           options: {
             //Animação: o gráfico será animado com uma animação de rotação.
