@@ -107,21 +107,40 @@
 
                   var total = data['05. price'] * {{ quantity }};
                   total = total.toFixed(2);
-                  total = "R$" + total;
+                  total = "R$ " + total;
                   total = total.replace(".", ",");
                   $("#valor-total-{{id}}").text(total);
 
                   var porc = (((data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }})* 100) /{{totalinvestedAmount}} ;
                   porc = parseFloat(porc);
+                  if(porc == 0){
+                    $("#rendimento-porcentagem-{{id}}").css({'color': ''});
+                  }
+                  else if(porc > 0){
+                    $("#rendimento-porcentagem-{{id}}").css({'color': '#459124'});
+                  }
+                  else {
+                    $("#rendimento-porcentagem-{{id}}").css({'color': '#cf2929'});
+                  }
                   porc = porc.toFixed(2);
                   porc = porc + "%";
                   porc = porc.replace(".", ",");
                   $("#rendimento-porcentagem-{{id}}").text(porc);
 
+
                   var rend = (data['05. price'] * {{ quantity }}) - {{ totalinvestedAmount }};
                   rend = parseFloat(rend);
+                  if(rend == 0){
+                    $("#rendimento-total-{{id}}").css({'color': ''});
+                  }
+                  else if(rend > 0){
+                    $("#rendimento-total-{{id}}").css({'color': '#459124'});
+                  }
+                  else {
+                    $("#rendimento-total-{{id}}").css({'color': '#cf2929'});
+                  }
                   rend = rend.toFixed(2);
-                  rend = "R$" + rend;
+                  rend = "R$ " + rend;
                   rend = rend.replace(".", ",");
                   $("#rendimento-total-{{id}}").text(rend);
                   });
@@ -134,15 +153,15 @@
                   <canvas class="line-chart{{id}}"></canvas>
                   <!-- Construção do gráfico -->
                   <script>
-                   
+
                     //Função de busca no API
                     $.getJSON('/pesquisa-historico/{{code}}', data => {
                       var todasDatas = [];
                       var close = [];
                       todasDatas = Object.keys(data);
                       todasDatas = todasDatas.slice(0,52);
-                      Object.keys(data).forEach(key => { 
-                        close.push(data[key]['4. close']); // key - value 
+                      Object.keys(data).forEach(key => {
+                        close.push(data[key]['4. close']); // key - value
                       });
                       close = close.slice(0,52);
                       close.reverse();
@@ -291,7 +310,7 @@
           modal.find('#_id').val(recipient);
         });
       </script>
-      
+
     </div>
   </div>
 </div>
