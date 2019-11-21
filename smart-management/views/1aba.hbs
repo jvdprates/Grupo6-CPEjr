@@ -93,9 +93,14 @@
                   <div class="col-sm-8 text-center">
                     <p class="mb-1">Data da compra: {{formatTime date "yyyy/mm/dd"}}</p>
                   </div>
+
                 </div>
 
+
+
+
                 <script type="text/javascript">
+
                   $.getJSON('/pesquisa-stock/{{code}}', data => {
                     console.log(data['05. price'] * {{ quantity }});
                   var atual = data['05. price'];
@@ -104,6 +109,8 @@
                   atual = "R$ " + atual;
                   atual = atual.replace(".", ",");
                   $("#valor-atual-{{id}}").text(atual);
+                  console.log(atual);
+
 
                   var total = data['05. price'] * {{ quantity }};
                   total = total.toFixed(2);
@@ -240,6 +247,29 @@
   </table>
 </div>
 
+<div class="col-sm-4 text-center">
+  <script type="text/javascript">
+  $.getJSON('/pesquisa-stock/BOVA11.SAO', data => {
+      var bova11 = data['05. price'];
+      bova11 = parseFloat(bova11);
+      bova11 = bova11.toFixed(2);
+      // bova11 = "R$ " + bova11;
+      // bova11 = bova11.replace(".", ",");
+
+      console.log(bova11);
+
+      var Bova11Inicio2019 = 87.90;
+      var PorcBova11 = ((bova11 - Bova11Inicio2019)/Bova11Inicio2019)*100;
+      var PorcBova11 = PorcBova11.toFixed(2);
+      var PorcBova11 = PorcBova11 + "%";
+        $("#ibov11-{{id}}").text(PorcBova11);
+      console.log(PorcBova11);
+  });
+
+  </script>
+  <p class="mb-1">Acumulado Ibov 2019</p>
+    <p id="ibov11-{{id}}"> Carregando... </p>
+</div>
 
 
 <div class="container-fluid">
