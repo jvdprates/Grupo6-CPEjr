@@ -140,7 +140,7 @@ router.get('/pesquisa-stock/:symbol', function(req, res, next) {
 });
 
 function getValues(symbol, callback) {
-  request('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + symbol + '&apikey=5M98NU65NMZOASYR',
+  request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + symbol + '&outputsize=full&apikey=5M98NU65NMZOASYR',
     (error, response, body) => {
       if (JSON.parse(body)['Note'] != null)
       {
@@ -148,7 +148,7 @@ function getValues(symbol, callback) {
       }
       else
       {
-        let value = JSON.parse(body)['Global Quote'];
+        let value = JSON.parse(body)['Time Series (Daily)'];
         callback(value);
       }
     });
@@ -287,27 +287,27 @@ router.post('/deletar', function (req, res, next) {
   res.redirect('/minha-carteira');
 });
 
-router.get('/pesquisa-historico/:symbol', function(req, res, next) {
-  const symbol = req.params.symbol;
-  getHistory(symbol, function(value) {
-    res.send(value);
-  });
-});
-
-function getHistory(symbol, callback) {
-  request('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&apikey=Z0JH1MQZPCKQCEX1',
-    (error, response, body) => {
-      if (JSON.parse(body)['Note'] != null)
-      {
-        setTimeout(() => {getHistory(symbol, callback)}, 60000);
-      }
-      else
-      {
-        let value = JSON.parse(body)['Weekly Time Series'];
-        callback(value);
-      }
-    });
-}
+// router.get('/pesquisa-historico/:symbol', function(req, res, next) {
+//   const symbol = req.params.symbol;
+//   getHistory(symbol, function(value) {
+//     res.send(value);
+//   });
+// });
+//
+// function getHistory(symbol, callback) {
+//   request('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=' + symbol + '&apikey=Z0JH1MQZPCKQCEX1',
+//     (error, response, body) => {
+//       if (JSON.parse(body)['Note'] != null)
+//       {
+//         setTimeout(() => {getHistory(symbol, callback)}, 60000);
+//       }
+//       else
+//       {
+//         let value = JSON.parse(body)['Weekly Time Series'];
+//         callback(value);
+//       }
+//     });
+// }
 
 
 
